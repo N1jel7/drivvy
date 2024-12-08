@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+${dialogue.name}
 <body>
     <div>
-        <#list dialogue.getMessages() as dial>
+        <#list dialogue as dial>
             <h1>${dial.author}</h1>
             <div>
                 ${dial.content}

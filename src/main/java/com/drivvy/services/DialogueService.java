@@ -2,38 +2,62 @@ package com.drivvy.services;
 
 import com.drivvy.models.Dialogue;
 import com.drivvy.models.Message;
-import lombok.Getter;
+import com.drivvy.models.User;
+import com.drivvy.repositories.DialogueRepository;
+import com.drivvy.repositories.MessageRepository;
+import com.drivvy.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
-
+@Slf4j
+@RequiredArgsConstructor
 @Service
-@Getter
 public class DialogueService {
 
-    private List<Dialogue> dialogues = new ArrayList<>();
-    private List<Message> messages = new ArrayList<>();
+    private final DialogueRepository dialogueRepository;
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
 
-    {
-        messages.add(new Message("Antonio", "Hi nigger", new Date()));
-        messages.add(new Message("Vano", "Hi man", new Date()));
-        messages.add(new Message("Antonio", "Welcome", new Date()));
-        dialogues.add(new Dialogue("Antonio", "Hello!", new byte[4], messages));
-        dialogues.add(new Dialogue("Vano", "Hi!", new byte[4], messages));
+    public List<Dialogue> getDialogues() {
+        return dialogueRepository.findAll();
     }
 
-    public void addMessageByDialogueId(Long id,Message message) {
-        Dialogue dialogue = getDialogueById(id);
-        dialogue.getMessages().add(message);
+    public void addMessage(Message message) {
+        log.info("Saving message {}", message);
+        messageRepository.save(message);
+    }
+
+    public void addDialogue(Dialogue dialogue) {
+        log.info("Saving dialogue {}", dialogue);
+        dialogueRepository.save(dialogue);
     }
 
     public Dialogue getDialogueById(long id) {
-        return dialogues.stream().filter(d -> d.getId() == id).findFirst().orElse(null);
+        log.info("Getting dialogue with id");
+        return dialogueRepository.findById(id).orElse(null);
     }
 
     public void deleteDialogue(Long id) {
-        dialogues.removeIf(d -> d.getId() == id);
+        log.info("Deleting dialogue with id {}", id);
+        dialogueRepository.deleteById(id);
+    }
+
+    public void getUserDialogues(String username) {
+        dialogueRepository
+    }
+
+    public List<Message> getMessages(Long id) {
+        return dialogueRepository.getMessagesByDialogueId(id);
+    }
+
+    public Dialogue createDialogue(String username) {
+        User user = userRepository.findByUsername(username);
+        if(user != null) {
+            return new Dialogue(user.getUsername());
+        } else
+            return null;
     }
 }

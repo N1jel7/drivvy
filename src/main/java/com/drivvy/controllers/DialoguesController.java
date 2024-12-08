@@ -1,8 +1,8 @@
 package com.drivvy.controllers;
 
+import com.drivvy.models.Dialogue;
 import com.drivvy.models.Message;
 import com.drivvy.services.DialogueService;
-import com.drivvy.services.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +20,15 @@ public class DialoguesController {
     @PostMapping("/dialogues/{id}")
     public String addMessage(Message message, @PathVariable Long id, Model model) {
         model.addAttribute("dialogue", dialogueService.getDialogueById(id));
-        dialogueService.addMessageByDialogueId(id, message);
+        dialogueService.addMessage(message);
         return "dialogue";
     }
 
     @GetMapping("/dialogues")
     public String dialogues(Model model) {
-        model.addAttribute("dialogues", dialogueService.getDialogues());
+        String username = (String) model.getAttribute("username");
+        model.addAttribute("dialogues", dialogueService.getUserDialogues(username));
+        model.addAttribute("messages", dialogueService.getMessages());
         return "dialogues";
     }
 
@@ -34,5 +36,16 @@ public class DialoguesController {
     public String dialogue(@PathVariable Long id, Model model) {
         model.addAttribute("dialogue", dialogueService.getDialogueById(id));
         return "dialogue";
+    }
+
+    @PostMapping("dialogues/create")
+    public String createDialogue(String username, Model model) {
+        Dialogue dialogue = dialogueService.createDialogue(username);
+        if(dialogue != null) {
+            model.addAttribute("dialogue", dialogue);
+            return "dialogue";
+        } else {
+            return "redirect:dialogues";
+        }
     }
 }

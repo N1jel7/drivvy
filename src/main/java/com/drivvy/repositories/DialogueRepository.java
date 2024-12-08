@@ -1,2 +1,12 @@
-package com.drivvy.repositories;public class DialogueRepository {
-}
+package com.drivvy.repositories;
+
+import com.drivvy.models.Dialogue;
+import com.drivvy.models.Message;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface DialogueRepository extends JpaRepository<Dialogue, Long> {
+    List<Dialogue> findDialoguesBy(String username);
+
+    }

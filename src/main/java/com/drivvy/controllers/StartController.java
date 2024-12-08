@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class StartController {
     @GetMapping("/")
     public String start() {
-        return "start";
+        return "drivvy";
     }
 }
