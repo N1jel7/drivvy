@@ -19,8 +19,6 @@ public class User {
     private int id;
     @Column(name = "username")
     private String username;
-    @OneToMany(mappedBy = "users")
-    private List<Dialogue> dialogues;
 
 
     public User(String username) {

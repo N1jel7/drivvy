@@ -2,6 +2,7 @@ package com.drivvy.controllers;
 
 import com.drivvy.models.Dialogue;
 import com.drivvy.models.Message;
+import com.drivvy.models.User;
 import com.drivvy.services.DialogueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
 @RequiredArgsConstructor
+@SessionAttributes("user")
 public class DialoguesController {
 
     private final DialogueService dialogueService;
@@ -25,10 +28,8 @@ public class DialoguesController {
     }
 
     @GetMapping("/dialogues")
-    public String dialogues(Model model) {
-        String username = (String) model.getAttribute("username");
-        model.addAttribute("dialogues", dialogueService.getUserDialogues(username));
-        model.addAttribute("messages", dialogueService.getMessages());
+    public String dialogues(User user, Model model) {
+        model.addAttribute("dialogues", dialogueService.getUserDialogues(user.getUsername()));
         return "dialogues";
     }
 

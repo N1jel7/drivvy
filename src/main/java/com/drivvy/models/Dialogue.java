@@ -21,7 +21,7 @@ public class Dialogue {
     private String name;
     @OneToMany
     private List<Message> messages;
-    @ManyToOne
+    @ManyToMany
     private List<User> users;
 
     public Dialogue(String name) {

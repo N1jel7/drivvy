@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
@@ -45,12 +44,9 @@ public class DialogueService {
         dialogueRepository.deleteById(id);
     }
 
-    public void getUserDialogues(String username) {
-        dialogueRepository
-    }
-
-    public List<Message> getMessages(Long id) {
-        return dialogueRepository.getMessagesByDialogueId(id);
+    public List<Dialogue> getUserDialogues(String username) {
+        User user = userRepository.findByUsername(username);
+        return dialogueRepository.findByUsersContains(user);
     }
 
     public Dialogue createDialogue(String username) {
@@ -60,4 +56,5 @@ public class DialogueService {
         } else
             return null;
     }
+
 }
