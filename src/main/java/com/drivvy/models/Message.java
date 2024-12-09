@@ -17,6 +17,7 @@ public class Message {
     private Long id;
     private String author;
     private String content;
+    @Column(name = "dialogue_id")
     private Long dialogueId;
 
     public Message(String author, String content) {

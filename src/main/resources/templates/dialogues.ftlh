@@ -9,7 +9,7 @@
 <body>
 <#list dialogues as dialog>
     <div>
-        <a href="/dialogues/${dialog.id}">${dialog.name}, ${dialog.lastMessage}</a>
+        <a href="/dialogues/${dialog.id}">${dialog.title}</a>
         <#else>
             Пока что нет диалогов...
     </div>

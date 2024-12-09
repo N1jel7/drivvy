@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
-${dialogue.name}
+<form method="get" action="/dialogues">
+    <div>
+        <button type="submit">Вернуться к диалогам</button>
+    </div>
+</form>
+<div>
+    Название диалога - ${dialogue.title}
+</div>
+
 <body>
     <div>
-        <#list dialogue as dial>
-            <h1>${dial.author}</h1>
+        <#list dialogue.getMessages() as msg>
+            <h1>${msg.author}</h1>
             <div>
-                ${dial.content}
+                ${msg.content}
             </div>
         </#list>
     </div>
 <div>
     <form method="post" action="/dialogues/${dialogue.id}">
-        <p><input type="text" name="author" placeholder="Введите автора" size="18" /></p>
         <p><input type="text" name="content" placeholder="Введите контент" size="18" /></p>
         <p>
             <button type="submit">Отправить</button>

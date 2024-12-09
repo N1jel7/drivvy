@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -20,18 +23,11 @@ public class DialogueService {
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
 
-    public List<Dialogue> getDialogues() {
-        return dialogueRepository.findAll();
-    }
-
-    public void addMessage(Message message) {
+    public void addMessage(Message message, Long dialogueId) {
         log.info("Saving message {}", message);
+        message.setDialogueId(dialogueId);
+        message.setId(null);
         messageRepository.save(message);
-    }
-
-    public void addDialogue(Dialogue dialogue) {
-        log.info("Saving dialogue {}", dialogue);
-        dialogueRepository.save(dialogue);
     }
 
     public Dialogue getDialogueById(long id) {
@@ -39,20 +35,23 @@ public class DialogueService {
         return dialogueRepository.findById(id).orElse(null);
     }
 
-    public void deleteDialogue(Long id) {
-        log.info("Deleting dialogue with id {}", id);
-        dialogueRepository.deleteById(id);
-    }
 
     public List<Dialogue> getUserDialogues(String username) {
         User user = userRepository.findByUsername(username);
         return dialogueRepository.findByUsersContains(user);
     }
 
-    public Dialogue createDialogue(String username) {
+    // TO DO REFACTORING
+    public Dialogue createDialogue(String currentUserUsername, String username) {
+        User currentUser = userRepository.findByUsername(currentUserUsername);
         User user = userRepository.findByUsername(username);
-        if(user != null) {
-            return new Dialogue(user.getUsername());
+        if (user != null) {
+            List<User> users = new ArrayList<>();
+            users.add(currentUser);
+            users.add(user);
+            return dialogueRepository.save(
+                    new Dialogue(user.getUsername() + " and "+ currentUserUsername ,null, new ArrayList<>(), users)
+            );
         } else
             return null;
     }
