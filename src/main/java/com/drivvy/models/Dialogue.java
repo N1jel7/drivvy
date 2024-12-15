@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.DuplicateFormatFlagsException;
 import java.util.List;
 
@@ -26,6 +27,14 @@ public class Dialogue {
     private List<User> users;
     @Column
     private String title;
+    private byte[] avatar;
+    @Transient
+    private String decodedAvatar;
+
+    @PostLoad
+    private void postLoad(){
+        decodedAvatar = users.getLast().getDecodedAvatar();
+    }
 
     public Dialogue(String title, Long id, List<Message> messages, List<User> users) {
         this.title = title;

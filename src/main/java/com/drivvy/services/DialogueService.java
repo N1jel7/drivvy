@@ -50,7 +50,7 @@ public class DialogueService {
             users.add(currentUser);
             users.add(user);
             return dialogueRepository.save(
-                    new Dialogue(user.getUsername() + " and "+ currentUserUsername ,null, new ArrayList<>(), users)
+                    new Dialogue(user.getUsername() ,null, new ArrayList<>(), users)
             );
         } else
             return null;

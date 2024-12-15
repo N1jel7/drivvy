@@ -23,7 +23,9 @@ public class DialoguesController {
     @PostMapping("/dialogues/{id}")
     public String addMessage(Message message, @PathVariable Long id, Model model, User user) {
         message.setAuthor(user.getUsername());
-        model.addAttribute("dialogue", dialogueService.getDialogueById(id));
+        Dialogue dialogue = dialogueService.getDialogueById(id);
+        model.addAttribute("dialogue", dialogue);
+        model.addAttribute("avatar", dialogue.getUsers().getLast().getDecodedAvatar());
         dialogueService.addMessage(message, id);
         return "dialogue";
     }
@@ -36,6 +38,7 @@ public class DialoguesController {
             for (User usr : dial.getUsers()) {
                 if (!user.getUsername().equals(usr.getUsername())) {
                     dial.setTitle(usr.getUsername());
+                    dial.setDecodedAvatar(usr.getDecodedAvatar());
                 }
             }
         }
@@ -47,15 +50,18 @@ public class DialoguesController {
 
     @GetMapping("/dialogues/{id}")
     public String dialogue(@PathVariable Long id, Model model) {
-        model.addAttribute("dialogue", dialogueService.getDialogueById(id));
+        Dialogue dialogue = dialogueService.getDialogueById(id);
+        model.addAttribute("dialogue", dialogue);
+        model.addAttribute("avatar", dialogue.getUsers().getLast().getDecodedAvatar());
         return "dialogue";
     }
 
     @PostMapping("dialogues/create")
-    public String createDialogue(@SessionAttribute User user, String username, Model model) {
-        if (!username.equals(user.getUsername())) {
-            Dialogue dialogue = dialogueService.createDialogue(user.getUsername(), username);
+    public String createDialogue(@SessionAttribute User user, String findingUsername, Model model) {
+        if (!findingUsername.equals(user.getUsername())) {
+            Dialogue dialogue = dialogueService.createDialogue(user.getUsername(), findingUsername);
             if (dialogue != null) {
+                model.addAttribute("avatar", dialogue.getUsers().getLast().getDecodedAvatar());
                 model.addAttribute("dialogue", dialogue);
                 return "dialogue";
             }

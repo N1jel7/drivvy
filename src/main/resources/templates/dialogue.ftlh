@@ -6,7 +6,7 @@
     </div>
 </form>
 <div>
-    Название диалога - ${dialogue.title}
+    Собеседник - ${dialogue.title} <img src="data:image/png;base64,${avatar}" width="45" height="45"> <br>
 </div>
 
 <body>
