@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Cascade;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,6 +34,9 @@ public class User {
     private byte[] avatar;
     @Transient
     private String decodedAvatar;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id")
+    private List<Car> cars;
 
     @PostLoad
     private void postLoad(){

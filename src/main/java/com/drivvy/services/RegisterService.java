@@ -12,7 +12,7 @@ public class RegisterService {
 
     public boolean register(User user) {
         if(userRepository.findByUsername(user.getUsername()) == null) {
-            user.setAvatarByPath("E:\\Dev\\drivvy\\src\\main\\resources\\images\\avatar.png");
+            user.setAvatarByPath("E:\\Dev\\drivvy\\src\\main\\resources\\images\\default_user.png"); // replace with short url
             userRepository.save(user);
             return true;
         }

@@ -6,6 +6,7 @@
 <div>
     <a href="/dialogues">Диалоги</a>
     <a href="/settings">Настройки</a>
+    <a href="/cars">Мои машины</a>
 </div>
 </body>
 </html>

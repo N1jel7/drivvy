@@ -23,7 +23,7 @@ public class Dialogue {
     @OneToMany
     @JoinColumn(name = "dialogue_id")
     private List<Message> messages;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<User> users;
     @Column
     private String title;
