@@ -20,9 +20,4 @@ public class Message {
     @Column(name = "dialogue_id")
     private Long dialogueId;
 
-    public Message(String author, String content) {
-        this.author = author;
-        this.content = content;
-    }
-
 }

@@ -37,20 +37,34 @@ public class DialogueService {
 
 
     public List<Dialogue> getUserDialogues(String username) {
+        log.info("Getting dialogues of user: {}", username);
         User user = userRepository.findByUsername(username);
-        return dialogueRepository.findByUsersContains(user);
+        List<Dialogue> dialogues = dialogueRepository.findByUsersContains(user);
+
+        for (Dialogue dial : dialogues) {
+            for (User usr : dial.getUsers()) {
+                if (!user.getUsername().equals(usr.getUsername())) {
+                    dial.setTitle(usr.getUsername());
+                    dial.setDecodedAvatar(usr.getDecodedAvatar());
+                }
+            }
+        }
+
+        return dialogues;
     }
 
-    // TO DO REFACTORING
-    public Dialogue createDialogue(String currentUserUsername, String username) {
-        User currentUser = userRepository.findByUsername(currentUserUsername);
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
+    public Dialogue createDialogue(String currentUserUsername, String findingUsername) {
+        log.info("Creating dialogue with users: {} and {}", currentUserUsername, findingUsername);
+        User currentUserFromDb = userRepository.findByUsername(currentUserUsername);
+        User userFromDb = userRepository.findByUsername(findingUsername);
+
+        if (userFromDb != null) {
             List<User> users = new ArrayList<>();
-            users.add(currentUser);
-            users.add(user);
+            users.add(currentUserFromDb);
+            users.add(userFromDb);
+            log.info("Dialogue for users {} and {} successfully created", currentUserUsername, findingUsername);
             return dialogueRepository.save(
-                    new Dialogue(user.getUsername() ,null, new ArrayList<>(), users)
+                    new Dialogue(userFromDb.getUsername(), users)
             );
         } else
             return null;

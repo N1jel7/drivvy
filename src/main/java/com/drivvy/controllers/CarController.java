@@ -5,6 +5,7 @@ import com.drivvy.models.User;
 import com.drivvy.repositories.CarRepository;
 import com.drivvy.repositories.UserRepository;
 import com.drivvy.services.CarService;
+import com.drivvy.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,31 +18,30 @@ import java.util.List;
 @SessionAttributes("user")
 @RequiredArgsConstructor
 @Controller
-public class CarController  {
+public class CarController {
 
     private final CarService carService;
     private final UserRepository userRepository;
-    private final CarRepository carRepository;
+    private final UserService userService;
 
     @GetMapping("/cars")
     public String cars(User user, Model model) {
 
-        User userFromDb = userRepository.findByUsername(user.getUsername());
-        List<Car> cars = userFromDb.getCars();
-        model.addAttribute("cars", cars);
+        User userFromDb = carService.getUserInfo(user.getUsername());
+        model.addAttribute("cars", userFromDb.getCars());
 
         return "cars";
     }
 
     @GetMapping("/cars/{id}")
-    public String car(@PathVariable int id, User user, Model model) {
-        model.addAttribute("car", carRepository.findById(id));
+    public String car(@PathVariable int id, Model model) {
+        model.addAttribute("car", carService.getCarById(id));
         return "car";
     }
 
     @PostMapping("/cars/create")
     public String createCar(Car car, @RequestParam("files") List<MultipartFile> files, User user) throws IOException {
-        Long userId = userRepository.findByUsername(user.getUsername()).getId();
+        Long userId = userService.getUserId(user.getUsername());
         car.setUserId(userId);
         carService.createCar(car, files);
 

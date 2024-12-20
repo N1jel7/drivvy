@@ -10,22 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Base64;
-
+@RequiredArgsConstructor
 @Controller
 @SessionAttributes("user")
 public class SettingsController {
-    private final UserRepository userRepository;
-    private final SettingsService settingsService;
 
-    public SettingsController(UserRepository userRepository, SettingsService settingsService) {
-        this.userRepository = userRepository;
-        this.settingsService = settingsService;
-    }
+    private final SettingsService settingsService;
 
     @GetMapping("/settings")
     public String settings(@SessionAttribute User user, Model model) {
-        User userDb = userRepository.findByUsername(user.getUsername());
+        User userDb = settingsService.getUserInfo(user.getUsername());
         model.addAttribute("user", userDb);
         model.addAttribute("avatar", userDb.getDecodedAvatar());
         return "settings";
@@ -33,7 +27,7 @@ public class SettingsController {
 
     @PostMapping("/settings/update")
     public String infoUpdate(@RequestParam("avatar") MultipartFile avatar, @SessionAttribute User user, Model model) {
-        if(avatar != null) {
+        if (avatar != null) {
             User userDb = settingsService.updateAvatar(avatar, user.getId());
             model.addAttribute("avatar", userDb.getDecodedAvatar());
             model.addAttribute("user", userDb);

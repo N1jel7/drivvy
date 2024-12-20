@@ -1,7 +1,6 @@
 package com.drivvy.repositories;
 
 import com.drivvy.models.Dialogue;
-import com.drivvy.models.Message;
 import com.drivvy.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

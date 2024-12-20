@@ -1,13 +1,12 @@
 package com.drivvy.controllers;
 
 import com.drivvy.models.User;
-import com.drivvy.repositories.UserRepository;
 import com.drivvy.services.LoginService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,8 +22,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(User user) {
-        if(loginService.login(user.getUsername())) {
-
+        if (loginService.login(user.getUsername())) {
             return "start";
         } else
             return "login";

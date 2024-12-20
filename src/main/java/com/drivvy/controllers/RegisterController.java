@@ -21,7 +21,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String register(User user) {
-        if(registerService.register(user)) {
+        if(registerService. register(user)) {
             return "redirect:/login";
         } else
             return "redirect:/register";
