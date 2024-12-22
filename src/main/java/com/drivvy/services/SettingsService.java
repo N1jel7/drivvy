@@ -12,7 +12,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SettingsService {
+public class SettingsService implements SettingsServiceInterface {
 
     private final UserRepository userRepository;
 
@@ -23,7 +23,7 @@ public class SettingsService {
             userFromDb.setAvatar(avatar);
             return userRepository.save(userFromDb);
         } catch (IOException e) {
-            log.warn("Error occurred while updating avatar {}",e.getMessage());
+            log.warn("Error occurred while updating avatar {}", e.getMessage());
         }
         return null;
     }

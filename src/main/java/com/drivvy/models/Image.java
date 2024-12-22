@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.Base64;
 
@@ -31,13 +28,6 @@ public class Image {
     @Transient
     private String decodedImage;
 
-    public void setImageByPath(String path) {
-        try {
-            this.image = Files.readAllBytes(new File(path).toPath());
-        } catch (IOException e) {
-            log.warn("Error occurred while setting avatar {}", e.getMessage());
-        }
-    }
 
     @PostLoad
     private void postLoad() {

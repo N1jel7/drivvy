@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Base64;
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class User {
     private List<Car> cars;
 
     @PostLoad
-    private void postLoad(){
+    private void postLoad() {
         decodedAvatar = Base64.getEncoder().encodeToString(avatar);
     }
 
@@ -44,11 +41,4 @@ public class User {
         this.username = username;
     }
 
-    public void setAvatarByPath(String path) {
-        try {
-            this.avatar = Files.readAllBytes(new File(path).toPath());
-        } catch (IOException e) {
-            log.warn("Error occurred while setting avatar {}",e.getMessage());
-        }
-    }
 }

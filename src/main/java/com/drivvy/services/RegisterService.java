@@ -3,23 +3,30 @@ package com.drivvy.services;
 import com.drivvy.models.User;
 import com.drivvy.properties.ConfigProperties;
 import com.drivvy.repositories.UserRepository;
-import freemarker.core.Environment;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterService {
+@Slf4j
+public class RegisterService implements RegisterServiceInterface {
     private final UserRepository userRepository;
     private final ConfigProperties configProperties;
 
     public boolean register(User user) {
-        if(userRepository.findByUsername(user.getUsername()) == null) {
-            user.setAvatarByPath(configProperties.getUserImagePath() );
+        if (userRepository.findByUsername(user.getUsername()) == null) {
+            try {
+                user.setAvatar(Files.readAllBytes(new File(configProperties.getUserImagePath()).toPath()));
+            } catch (IOException e) {
+                log.warn("Error occurred while setting avatar {}", e.getMessage());
+            }
             userRepository.save(user);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 }

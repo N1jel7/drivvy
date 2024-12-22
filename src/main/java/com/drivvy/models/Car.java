@@ -40,17 +40,4 @@ public class Car {
     public String getFirstDecodedImage() {
         return decodedImages.getFirst();
     }
-
-    // TODO перенести в сервисный слой
-    public void addImageByPath(String path) {
-        Image image = new Image();
-        image.setImageByPath(path);
-        images.add(image);
-    }
-
-    // TODO перенести в сервисный слой
-    public void addImage(Image image) {
-        images.add(image);
-    }
-
 }

@@ -2,7 +2,6 @@ package com.drivvy.controllers;
 
 
 import com.drivvy.models.User;
-import com.drivvy.repositories.UserRepository;
 import com.drivvy.services.SettingsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

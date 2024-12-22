@@ -2,7 +2,6 @@ package com.drivvy.controllers;
 
 import com.drivvy.models.Car;
 import com.drivvy.models.User;
-import com.drivvy.repositories.CarRepository;
 import com.drivvy.repositories.UserRepository;
 import com.drivvy.services.CarService;
 import com.drivvy.services.UserService;
@@ -44,7 +43,7 @@ public class CarController {
         Long userId = userService.getUserId(user.getUsername());
         car.setUserId(userId);
         carService.createCar(car, files);
-
+        // TODO true/false alert of creation
         return "redirect:/cars";
     }
 }

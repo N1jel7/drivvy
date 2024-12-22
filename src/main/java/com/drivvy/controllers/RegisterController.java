@@ -1,7 +1,6 @@
 package com.drivvy.controllers;
 
 import com.drivvy.models.User;
-import com.drivvy.services.LoginService;
 import com.drivvy.services.RegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String register(User user) {
-        if(registerService. register(user)) {
+        if (registerService.register(user)) {
             return "redirect:/login";
         } else
             return "redirect:/register";

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserServiceInterface {
 
     private final UserRepository userRepository;
 
     public Long getUserId(String username) {
-        return userRepository.findUserIdByUsername(username);
+        return userRepository.findByUsername(username).getId();
     }
 }

@@ -11,13 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class DialogueService {
+public class DialogueService implements DialogueServiceInterface {
 
     private final DialogueRepository dialogueRepository;
     private final MessageRepository messageRepository;
@@ -69,5 +68,4 @@ public class DialogueService {
         } else
             return null;
     }
-
 }
