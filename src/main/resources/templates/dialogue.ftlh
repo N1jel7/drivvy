@@ -6,12 +6,12 @@
     </div>
 </form>
 <div>
-    Собеседник - ${dialogue.title} <img src="data:image/png;base64,${avatar}" width="45" height="45"> <br>
+    Собеседник - ${dialogue.title()} <img src="data:image/png;base64,${dialogue.avatar()}" width="45" height="45"> <br>
 </div>
 
 <body>
     <div>
-        <#list dialogue.getMessages() as msg>
+        <#list dialogue.messages() as msg>
             <h1>${msg.author}</h1>
             <div>
                 ${msg.content}
@@ -19,7 +19,7 @@
         </#list>
     </div>
 <div>
-    <form method="post" action="/dialogues/${dialogue.id}">
+    <form method="post" action="/dialogues/${dialogue.id()}">
         <p><input type="text" name="content" placeholder="Введите контент" size="18" /></p>
         <p>
             <button type="submit">Отправить</button>
