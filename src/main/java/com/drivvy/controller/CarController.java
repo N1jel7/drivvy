@@ -1,5 +1,6 @@
 package com.drivvy.controller;
 
+import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.model.Car;
 import com.drivvy.model.User;
 import com.drivvy.service.CarServiceImpl;
@@ -34,9 +35,8 @@ public class CarController {
     }
 
     @PostMapping("/cars/create")
-    public String createCar(Car car, @RequestParam("files") List<MultipartFile> files) {
-        //TODO оставить уникальный username или id (одно убрать)
-        carServiceImpl.createCar(car, files);
+    public String createCar(User user, Car car, @RequestParam("files") List<MultipartFile> files) {
+        carServiceImpl.createCar(car, files, user.getId());
         // TODO true/false alert of creation
         return "redirect:/cars";
     }

@@ -1,5 +1,6 @@
 package com.drivvy.service;
 
+import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.model.User;
 import com.drivvy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,11 @@ public class AuthServiceImpl implements AuthService {
 
     public boolean login(String username) {
         return userRepository.findByUsername(username) != null;
+    }
+
+    public UserResponseDto setSessionParam(String username) {
+        User userDB = userRepository.findByUsername(username);
+        return new UserResponseDto(userDB.getId(), userDB.getUsername());
     }
 
     public boolean register(User user) {

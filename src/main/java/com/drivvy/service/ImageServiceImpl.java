@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -63,6 +64,18 @@ public class ImageServiceImpl implements ImageService {
         Image image = new Image();
         image.setImage(array);
         return image;
+    }
+
+    public Car setDefaultCarImage(Car car) {
+        try {
+            ArrayList<Image> defaultImage = new ArrayList<>();
+            defaultImage.add(convertArrayToImage(Files.readAllBytes(new File(configProperties.getCarImagePath()).toPath())));
+            car.setImages(defaultImage);
+            return car;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public User setDefaultUserImage(User user) {

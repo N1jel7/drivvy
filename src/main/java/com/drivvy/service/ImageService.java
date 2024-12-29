@@ -5,7 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-//todo ПЕРЕИМЕНОВАТЬ
 public interface ImageService {
 
     Image convertFileToImage(MultipartFile file) throws IOException;

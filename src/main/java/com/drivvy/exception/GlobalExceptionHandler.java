@@ -11,9 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({Exception.class, RuntimeException.class})
+    @ExceptionHandler({CarNotFoundException.class, CarValidationException.class})
     public String handle(Exception exception){
-        log.error("Произошел тотальный пиздец", exception);
+        log.error(exception.getLocalizedMessage(), exception);
         return "error";
     }
 }

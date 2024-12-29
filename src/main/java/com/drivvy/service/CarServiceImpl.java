@@ -1,5 +1,7 @@
 package com.drivvy.service;
 
+import com.drivvy.exception.CarNotFoundException;
+import com.drivvy.exception.CarValidationException;
 import com.drivvy.model.Car;
 import com.drivvy.model.User;
 import com.drivvy.repository.CarRepository;
@@ -20,20 +22,25 @@ public class CarServiceImpl implements CarService {
     private final UserRepository userRepository;
     private final ImageServiceImpl imageService;
 
-    public boolean createCar(Car car, List<MultipartFile> files) {
+    public void createCar(Car car, List<MultipartFile> files, Long userId) {
         validateImages(files);
         log.info("Trying to create car");
-        Car carWithImages = imageService.setImagesToCar(car, files);
+        Car carWithImages;
+
+        if(files.getFirst().getOriginalFilename().isEmpty()) {
+            carWithImages = imageService.setDefaultCarImage(car);
+        } else {
+            carWithImages = imageService.setImagesToCar(car, files);
+        }
+
+        car.setUserId(userId);
         carRepository.save(carWithImages);
         log.info("Car successfully created");
-        return false;
-
     }
 
     private static void validateImages(List<MultipartFile> files) {
-        if (files.isEmpty() || files.size() > 10) {
-            //todo CarValidationException <- RuntimeException // Неверное количество изображений
-            throw new IllegalStateException();
+        if (files.size() > 10) {
+            throw new CarValidationException("Incorrect number of images");
         }
     }
 
@@ -42,7 +49,11 @@ public class CarServiceImpl implements CarService {
     }
 
     public Car getCarById(int id) {
-        //TODO /CarNotFoundException*/
-        return carRepository.findById(id);
+        try {
+            return carRepository.findById(id);
+        } catch (RuntimeException e) {
+            throw new CarNotFoundException("Car with id " + id + " not found");
+        }
+
     }
 }

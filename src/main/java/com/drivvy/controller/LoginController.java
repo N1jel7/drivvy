@@ -1,5 +1,6 @@
 package com.drivvy.controller;
 
+import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.model.User;
 import com.drivvy.service.AuthServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ public class LoginController {
     @PostMapping("/login")
     public String login(User user) {
         if (loginServiceImpl.login(user.getUsername())) {
+            UserResponseDto params = loginServiceImpl.setSessionParam(user.getUsername());
+            user.setId(params.id());
             return "start";
         } else
             return "login";
