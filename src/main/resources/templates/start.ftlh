@@ -7,6 +7,7 @@
     <a href="/dialogues">Диалоги</a>
     <a href="/settings">Настройки</a>
     <a href="/cars">Мои машины</a>
+    <a href="/logout">Выйти</a>
 </div>
 </body>
 </html>
