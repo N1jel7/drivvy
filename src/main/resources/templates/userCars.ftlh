@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
-<form method="post" action="/cars/create" enctype="multipart/form-data">
+
+<form method="get" action="/start">
+    <button type="submit">Вернуться на главную страницу</button>
+</form>
+
+<form method="post" action="/${userId}/cars/create" enctype="multipart/form-data">
     <p><input type="text" name="make" placeholder="Введите марку" size="18" /></p>
     <p><input type="text" name="model" placeholder="Введите модель" size="18" /></p>
     <p><input type="text" name="year" placeholder="Введите год" size="18" /></p>
@@ -15,7 +20,7 @@
 <body>
 <#list cars as car>
     <div>
-    <a href="/cars/${car.id}">${car.make} ${car.model} ${car.year}</a>
+    <a href="/${userId}/cars/${car.id}">${car.make} ${car.model} ${car.year}</a>
     <img style="object-fit: contain" src="data:image/png;base64,${car.getFirstDecodedImage()}" width="100" height="100"> <br>
 <#else>
     Пока что нет добавленных машин...
