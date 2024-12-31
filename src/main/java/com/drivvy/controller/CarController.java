@@ -1,10 +1,7 @@
 package com.drivvy.controller;
 
-import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.model.Car;
-import com.drivvy.model.User;
 import com.drivvy.service.CarServiceImpl;
-import com.drivvy.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,24 +17,31 @@ public class CarController {
 
     private final CarServiceImpl carServiceImpl;
 
+    @GetMapping("/{userId}/cars")
+    public String userCars(@PathVariable Long userId, Model model) {
+
+        model.addAttribute("cars", carServiceImpl.getUserCars(userId));
+
+        return "userCars";
+    }
+
     @GetMapping("/cars")
-    public String cars(User user, Model model) {
+    public String cars(Model model) {
+        model.addAttribute("cars", carServiceImpl.getCars());
 
-        model.addAttribute("cars", carServiceImpl.getUserCars(user.getUsername()));
-
-        return "cars";
+        return "usersCars";
     }
 
-    @GetMapping("/cars/{id}")
-    public String car(@PathVariable int id, Model model) {
-        model.addAttribute("car", carServiceImpl.getCarById(id));
-        return "car";
+    @GetMapping("{userId}/cars/{carId}")
+    public String cars(@PathVariable Long userId, @PathVariable Long carId, Model model) {
+        model.addAttribute("car", carServiceImpl.getCarById(carId));
+        return "ownCarViewer";
     }
 
-    @PostMapping("/cars/create")
-    public String createCar(User user, Car car, @RequestParam("files") List<MultipartFile> files) {
-        carServiceImpl.createCar(car, files, user.getId());
+    @PostMapping("/{userId}/cars/create")
+    public String createCar(@PathVariable Long userId, Car car, @RequestParam("files") List<MultipartFile> files) {
+        carServiceImpl.createCar(car, files, userId);
         // TODO true/false alert of creation
-        return "redirect:/cars";
+        return "redirect:/{userId}/cars";
     }
 }

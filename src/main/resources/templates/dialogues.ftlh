@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+
+<form method="get" action="/start">
+    <button type="submit">Вернуться на главную страницу</button>
+</form>
+
 <form method="post" action="/dialogues/create">
     <p><input type="text" name="findingUsername" placeholder="Введите логин" size="18" /></p>
     <p>

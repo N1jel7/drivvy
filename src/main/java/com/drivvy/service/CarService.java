@@ -11,7 +11,9 @@ public interface CarService {
 
     void createCar(Car car, List<MultipartFile> files, Long userId);
 
-    List<Car> getUserCars(String username);
+    List<Car> getCars();
 
-    Car getCarById(int id);
+    List<Car> getUserCars(Long userId);
+
+    Car getCarById(Long id);
 }

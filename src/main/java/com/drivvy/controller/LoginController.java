@@ -26,8 +26,8 @@ public class LoginController {
         if (loginServiceImpl.login(user.getUsername())) {
             UserResponseDto params = loginServiceImpl.setSessionParam(user.getUsername());
             user.setId(params.id());
-            return "start";
+            return "redirect:/start";
         } else
-            return "login";
+            return "redirect:/login";
     }
 }

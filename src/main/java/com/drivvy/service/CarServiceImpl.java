@@ -44,13 +44,19 @@ public class CarServiceImpl implements CarService {
         }
     }
 
-    public List<Car> getUserCars(String username) {
-        return userRepository.findByUsername(username).getCars();
+    public List<Car> getCars() {
+        return carRepository.findAll();
     }
 
-    public Car getCarById(int id) {
+    public List<Car> getUserCars(Long userId) {
+        return userRepository.findById(userId).get().getCars();
+    }
+
+
+
+    public Car getCarById(Long id) {
         try {
-            return carRepository.findById(id);
+            return carRepository.findById((long) id);
         } catch (RuntimeException e) {
             throw new CarNotFoundException("Car with id " + id + " not found");
         }

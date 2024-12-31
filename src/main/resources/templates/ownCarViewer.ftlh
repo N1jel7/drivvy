@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-<form method="get" action="/cars">
+<form method="get" action="/${userId}/cars">
     <div>
         <button type="submit">Вернуться к списку машин</button>
     </div>
