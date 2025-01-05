@@ -3,7 +3,6 @@ package com.drivvy.service;
 import com.drivvy.exception.CarNotFoundException;
 import com.drivvy.exception.CarValidationException;
 import com.drivvy.model.Car;
-import com.drivvy.model.User;
 import com.drivvy.repository.CarRepository;
 import com.drivvy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,20 +21,48 @@ public class CarServiceImpl implements CarService {
     private final UserRepository userRepository;
     private final ImageServiceImpl imageService;
 
+    public void editCarInfo(Car car, List<MultipartFile> files, Long carId) {
+        log.info("Editing car with id: {}", carId);
+
+        Car carFromDb = getCarById(carId);
+        validateImages(files);
+
+        carFromDb = carEditProcess(carFromDb, car, files);
+
+        carRepository.save(carFromDb);
+        log.info("Car successfully edited");
+    }
+
+    private Car carEditProcess(Car carFromDb, Car carFromRequest, List<MultipartFile> files) {
+        carFromDb.setMake(carFromRequest.getMake().isEmpty() ? carFromDb.getMake() : carFromRequest.getMake());
+        carFromDb.setDescription(carFromRequest.getDescription().isEmpty() ? carFromDb.getDescription() : carFromRequest.getDescription());
+        carFromDb.setEngineType(carFromRequest.getEngineType().isEmpty() ? carFromDb.getEngineType() : carFromRequest.getEngineType());
+        carFromDb.setEngineVolume(carFromRequest.getEngineVolume().isEmpty() ? carFromDb.getEngineVolume() : carFromRequest.getEngineVolume());
+        carFromDb.setModel(carFromRequest.getModel().isEmpty() ? carFromDb.getModel() : carFromRequest.getModel());
+        carFromDb.setYear(carFromRequest.getYear().isEmpty() ? carFromDb.getYear() : carFromRequest.getYear());
+        carFromDb = setCarImages(carFromDb, files);
+        return carFromDb;
+    }
+
     public void createCar(Car car, List<MultipartFile> files, Long userId) {
         validateImages(files);
         log.info("Trying to create car");
         Car carWithImages;
 
-        if(files.getFirst().getOriginalFilename().isEmpty()) {
-            carWithImages = imageService.setDefaultCarImage(car);
-        } else {
-            carWithImages = imageService.setImagesToCar(car, files);
-        }
+        carWithImages = setCarImages(car, files);
 
         car.setUserId(userId);
         carRepository.save(carWithImages);
         log.info("Car successfully created");
+    }
+
+    private Car setCarImages(Car car, List<MultipartFile> files) {
+        if(files.getFirst().getOriginalFilename().isEmpty() && car.getImages().isEmpty()) {
+            car = imageService.setDefaultCarImage(car);
+        } else {
+            car = imageService.setImagesToCar(car, files);
+        }
+        return car;
     }
 
     private static void validateImages(List<MultipartFile> files) {

@@ -43,12 +43,20 @@ public class ImageServiceImpl implements ImageService {
     public Car setImagesToCar(Car car, List<MultipartFile> files) {
 
         log.info("Trying to set images from uploaded files");
-
         List<Image> imagesFromFiles = new ArrayList<>();
+
+        if(car.getImages() != null) {
+            imagesFromFiles.addAll(car.getImages());
+        }
+
+        if(files.getFirst().getOriginalFilename().isEmpty()) {
+            car.setImages(imagesFromFiles);
+            return car;
+        }
 
         for (MultipartFile file : files) {
             Image image = convertFileToImage(file);
-            if (files.getFirst().equals(file)) {
+            if (files.getFirst().equals(file) && imagesFromFiles.isEmpty()) {
                 image.setPreview(true);
             }
             imagesFromFiles.add(image);

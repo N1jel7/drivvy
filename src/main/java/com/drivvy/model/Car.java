@@ -23,6 +23,8 @@ public class Car {
     private String year;
     private String engineVolume;
     private String engineType;
+    @Column(length = 500)
+    private String description;
     @Column(name = "user_id")
     private Long userId;
     @OneToMany(cascade = CascadeType.PERSIST)

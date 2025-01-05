@@ -13,16 +13,16 @@ public class RegisterController {
 
     private final AuthServiceImpl authService;
 
-    @GetMapping("/register")
+    @GetMapping("/sign-up")
     public String registerPage() {
-        return "register";
+        return "sign-up";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/sign-up")
     public String register(User user) {
         if (authService.register(user)) {
-            return "redirect:/login";
+            return "redirect:/sign-in";
         } else
-            return "redirect:/register";
+            return "redirect:/sign-up";
     }
 }

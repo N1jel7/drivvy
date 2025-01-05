@@ -23,7 +23,7 @@ public class AuthServiceImpl implements AuthService {
 
     public UserResponseDto setSessionParam(String username) {
         User userDB = userRepository.findByUsername(username);
-        return new UserResponseDto(userDB.getId(), userDB.getUsername());
+        return new UserResponseDto(userDB.getId(), userDB.getUsername(), userDB.getDecodedAvatar());
     }
 
     public boolean register(User user) {

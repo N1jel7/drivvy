@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class StartController {
     @GetMapping("/")
     public String start() {
-        return "drivvy";
+        return "redirect:/sign-up";
     }
 
     @GetMapping("/start")

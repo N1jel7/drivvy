@@ -27,6 +27,8 @@ public class Dialogue {
     private byte[] avatar;
     @Transient
     private String decodedAvatar;
+    @Transient
+    private Message lastMessage;
 
     public Dialogue(String title, List<User> users) {
         this.title = title;
@@ -36,5 +38,6 @@ public class Dialogue {
     @PostLoad
     private void postLoad() {
         decodedAvatar = users.getLast().getDecodedAvatar();
+        lastMessage = messages.getLast();
     }
 }

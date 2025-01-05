@@ -16,16 +16,17 @@ public class LoginController {
 
     private final AuthServiceImpl loginServiceImpl;
 
-    @GetMapping("/login")
+    @GetMapping("/sign-in")
     public String loginPage() {
-        return "login";
+        return "sign-in";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/sign-in")
     public String login(User user) {
         if (loginServiceImpl.login(user.getUsername())) {
             UserResponseDto params = loginServiceImpl.setSessionParam(user.getUsername());
             user.setId(params.id());
+            user.setDecodedAvatar(params.decodedAvatar());
             return "redirect:/start";
         } else
             return "redirect:/login";

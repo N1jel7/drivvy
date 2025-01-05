@@ -2,6 +2,7 @@ package com.drivvy.dto.response;
 
 public record UserResponseDto(
         Long id,
-        String username
+        String username,
+        String decodedAvatar
 ) {
 }
