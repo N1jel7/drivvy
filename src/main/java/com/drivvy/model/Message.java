@@ -2,9 +2,14 @@ package com.drivvy.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
+
+@Builder
 @Entity
 @Data
 @AllArgsConstructor
@@ -13,11 +18,17 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
-    private String author;
+
+    @ManyToOne
+    private User sender;
+
     private String content;
-    @Column(name = "dialogue_id")
-    private Long dialogueId;
+
+    @ManyToOne
+    private Chat chat;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }

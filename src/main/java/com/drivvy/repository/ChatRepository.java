@@ -1,0 +1,12 @@
+package com.drivvy.repository;
+
+import com.drivvy.model.Chat;
+import com.drivvy.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ChatRepository extends JpaRepository<Chat, Long> {
+    List<Chat> findByUsersContains(User user);
+}
+

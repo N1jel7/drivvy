@@ -1,49 +1,57 @@
 package com.drivvy.model;
 
+import com.drivvy.dto.common.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Base64;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Slf4j
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "username", unique = true)
+
+    @Column(unique = true)
     private String username;
+
     @Column(length = 100)
     private String password;
-    @Setter
-    @Lob
-    private byte[] avatar;
-    @Transient
-    private String decodedAvatar;
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_id")
-    private List<Car> cars;
+
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private Image avatar;
+
     private boolean enabled;
-    private LocalDate createdAt;
 
-    @PostLoad
-    private void postLoad() {
-        decodedAvatar = Base64.getEncoder().encodeToString(avatar);
-    }
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    public User(String username) {
-        this.username = username;
-    }
+    private String firstname;
+
+    private String lastname;
+
+    private String country;
+
+    private String city;
+
+    private Gender gender;
+
+    @DateTimeFormat(pattern = "MM-dd-YYYY")
+    private LocalDate birthday;
+
+    private String email;
 
 }

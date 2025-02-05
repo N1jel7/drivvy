@@ -10,4 +10,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ConfigProperties {
     private String userImagePath;
     private String carImagePath;
+    private String communityImagePath;
 }
