@@ -6,9 +6,6 @@ import java.time.LocalDate;
 
 public record UserResponseDto(
         Long id,
-<<<<<<< Updated upstream
-        String username
-=======
         String username,
         String avatar,
         String email,
@@ -18,6 +15,5 @@ public record UserResponseDto(
         String city,
         Gender gender,
         LocalDate birthday
->>>>>>> Stashed changes
 ) {
 }

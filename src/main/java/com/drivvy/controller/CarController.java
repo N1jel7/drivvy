@@ -19,28 +19,6 @@ public class CarController {
 
     private final CarServiceImpl carServiceImpl;
 
-<<<<<<< Updated upstream
-    @GetMapping("/{userId}/cars")
-    public String userCars(@PathVariable Long userId, Model model) {
-
-        model.addAttribute("cars", carServiceImpl.getUserCars(userId));
-
-        return "userCars";
-    }
-
-    @GetMapping("/cars")
-    public String cars(Model model) {
-        model.addAttribute("cars", carServiceImpl.getCars());
-
-        return "usersCars";
-    }
-
-    @GetMapping("{userId}/cars/{carId}")
-    public String cars(@PathVariable Long userId, @PathVariable Long carId, Model model) {
-        model.addAttribute("car", carServiceImpl.getCarById(carId));
-        return "ownCarViewer";
-    }
-=======
     @GetMapping("/")
     public String redirect() {
         return "redirect:/sign-up";
@@ -69,14 +47,12 @@ public class CarController {
             CarRequestDto carRequestDto,
             @RequestParam("images") List<MultipartFile> images,
             @SessionAttribute UserDto userDto) {
->>>>>>> Stashed changes
 
         carServiceImpl.createCar(carRequestDto, images, userDto.getId());
         // TODO true/false alert of creation
         return "redirect:/cars";
     }
-<<<<<<< Updated upstream
-=======
+
 
     @GetMapping("/car/create")
     public String createCar(Model model) {
@@ -104,5 +80,4 @@ public class CarController {
         carServiceImpl.removeCar(carId);
         return "redirect:/cars";
     }
->>>>>>> Stashed changes
 }

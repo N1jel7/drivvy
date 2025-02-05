@@ -24,16 +24,11 @@ public class Car {
     private Integer year;
     private Float engineVolume;
     private String engineType;
-<<<<<<< Updated upstream
-    @Column(name = "user_id")
-    private Long userId;
-=======
     private Integer mileage;
     @Column(length = 500)
     private String description;
     @ManyToOne
     private User owner;
->>>>>>> Stashed changes
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Image> images = new ArrayList<>();
 
