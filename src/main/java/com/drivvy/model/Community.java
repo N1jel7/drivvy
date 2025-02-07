@@ -38,6 +38,4 @@ public class Community {
     private AccessModifier accessModifier;
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-
 }

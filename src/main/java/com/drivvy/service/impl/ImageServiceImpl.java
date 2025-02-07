@@ -29,14 +29,21 @@ public class ImageServiceImpl implements ImageService {
     private final ConfigProperties configProperties;
     private final ImageRepository imageRepository;
 
-    public boolean validateImages(List<MultipartFile> files) {
+    public boolean validateFilesOnCreate(List<MultipartFile> files) {
         if(files.size() > 10 || files.getFirst().getOriginalFilename().isEmpty()) {
-            throw new ImageValidationException("Incorrect numbers of images (>10)");
+            throw new ImageValidationException("Incorrect numbers of images (>10 or null)");
         }
 
         log.info("Files successfully passed validation");
         return true;
     }
+
+    public boolean validateFilesOnUpdate(List<MultipartFile> files){
+        if(files.size() > 10) {
+            throw new ImageValidationException("Incorrect numbers of images (>10)");
+        }
+        return true;
+    };
 
     public Image convertFileToImage(MultipartFile file) {
         log.info("Trying to convert file to image");

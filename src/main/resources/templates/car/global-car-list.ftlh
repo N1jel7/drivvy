@@ -52,7 +52,7 @@
                         </div>
                         <div class="blog-description p-3">
                             <div class="date"><a href="/car/${car.id()}" tabindex="-1">${car.make()} ${car.model()} #{car.year()}</a></div>
-                            <h5 class="mb-2">${car.engineType()} ${car.engineVolume()?string(",##0.0;; decimalSeparator='.'")} #{car.mileage()} KM</h5>
+                            <h5 class="mb-2">${car.engineType()} ${car.engineVolume()} #{car.mileage()} KM</h5>
                             <div class="d-flex align-items-center justify-content-between  position-right-side" style="height: 50px;">
                                 <div class="like"><i class="ri-thumb-up-line pe-2"></i>20 like</div>
                                 <div class="comments"><i class="las la-comment-alt pe-2"></i>351 Comments</div>

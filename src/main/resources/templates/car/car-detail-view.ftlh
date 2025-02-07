@@ -45,8 +45,8 @@
                         </div>
                         <div class="blog-description mt-3">
                             <h5 class="mb-3 pb-3 border-bottom">
-                                There ${car.engineType()} ${car.engineVolume()?string(",##0.0;; decimalSeparator='.'")}
-                                ">${car.engineVolume()?string(",##0.0;; decimalSeparator='.'")} ${car.mileage()} KM</h5>
+                                There ${car.engineType()} ${car.engineVolume()}
+                                ">${car.engineVolume()} ${car.mileage()} KM</h5>
                             <div class="blog-meta d-flex align-items-center mb-3 position-right-side flex-wrap">
                                 <div class="date me-4"><i class="ri-calendar-2-fill text-primary pe-2"></i>2 Weeks ago
                                 </div>

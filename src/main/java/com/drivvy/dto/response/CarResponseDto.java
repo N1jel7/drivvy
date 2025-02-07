@@ -9,7 +9,7 @@ public record CarResponseDto(
         String make,
         String model,
         Integer year,
-        Float engineVolume,
+        String engineVolume,
         String engineType,
         Integer mileage,
         String description,

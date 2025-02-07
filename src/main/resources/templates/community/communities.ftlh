@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Groups</title>
+    <title>Communities</title>
 
     <link rel="shortcut icon" href="${springMacroRequestContext.contextPath}/assets/images/favicon.ico"/>
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/libs.min.css">

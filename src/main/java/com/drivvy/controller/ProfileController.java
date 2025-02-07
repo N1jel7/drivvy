@@ -1,8 +1,11 @@
 package com.drivvy.controller;
 
+import com.drivvy.dto.common.ObjectType;
+import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.request.UpdateUserInfoRequestDto;
 import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.dto.session.UserDto;
+import com.drivvy.service.impl.PostServiceImpl;
 import com.drivvy.service.impl.UserServiceImpl;
 import com.drivvy.util.CountryUtils;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 
 public class ProfileController {
 
     private final UserServiceImpl userService;
+    private final PostServiceImpl postService;
 
 
     @PostMapping("/profile-edit/update/personal-info")
@@ -61,6 +67,16 @@ public class ProfileController {
     public String privacyEdit() {
 
         return "user/privacy-edit";
+    }
+
+    @PostMapping("/profile/{id}/post/create")
+    public String createPost(
+            @PathVariable Long id,
+            PostRequestDto postRequestDto,
+            List<MultipartFile> filesImages
+    ) {
+        postService.create(postRequestDto, filesImages, ObjectType.USER, id);
+        return "redirect:/profile/{id}";
     }
 
 }

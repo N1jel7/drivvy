@@ -86,7 +86,7 @@
                                         <select class="form-select" name="engineVolume"
                                                 aria-label="Default select example 3">
                                             <#list volumes as volume>
-                                                <option value="${volume}" <#if volume == car.engineVolume()?c >selected</#if>>${volume}</option>
+                                                <option value="${volume}" <#if volume == car.engineVolume() >selected</#if>>${volume}</option>
                                             </#list>
                                         </select>
                                     </div>

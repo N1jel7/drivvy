@@ -35,5 +35,8 @@ public class Post {
     @ManyToOne
     private Community community;
 
+    @ManyToOne
+    private Car car;
+
 
 }

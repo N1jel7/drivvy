@@ -9,9 +9,11 @@ import com.drivvy.model.Community;
 import com.drivvy.model.Image;
 import com.drivvy.model.User;
 import com.drivvy.repository.CommunityRepository;
+import com.drivvy.repository.PostRepository;
 import com.drivvy.service.api.CommunityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,8 +27,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     private final ImageServiceImpl imageService;
     private final CommunityRepository communityRepository;
+    private final PostRepository postRepository;
     private final UserServiceImpl userService;
-    private final PostServiceImpl postService;
     private final CommunityMapper communityMapper;
 
 
@@ -41,7 +43,7 @@ public class CommunityServiceImpl implements CommunityService {
                 communityResponseDto.accessModifier(),
                 communityResponseDto.overviewMembers(),
                 communityRepository.countMembersByCommunityId(communityResponseDto.id()),
-                postService.countPostsByCommunityId(communityResponseDto.id())
+                postRepository.countPostsByCommunityId(communityResponseDto.id())
         );
     }
 
@@ -62,14 +64,21 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public CommunityResponseDto getCommunityById(Long id) {
+    public CommunityResponseDto getCommunityDtoById(Long id) {
         return mapToResponse(communityRepository.findById(id).orElseThrow(
                 () -> new GroupNotFoundException("Group with id '" + id + "' not found")
         ));
     }
 
+    public Community getCommunityById(Long id) {
+        return communityRepository.findById(id).orElseThrow(
+                () -> new GroupNotFoundException("Group with id '" + id + "' not found")
+        );
+    }
+
     @Override
     public CommunityResponseDto create(CommunityRequestDto communityRequestDto, MultipartFile avatarFile, Long creatorId) {
+        log.info("Trying to create community");
         Image image = null;
 
         if(avatarFile.getOriginalFilename().isEmpty()) {

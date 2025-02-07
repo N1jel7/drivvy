@@ -1,10 +1,12 @@
 package com.drivvy.service.impl;
 
+import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.request.UpdateUserInfoRequestDto;
 import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.dto.session.UserDto;
 import com.drivvy.exception.UserNotFoundException;
 import com.drivvy.mapper.UserMapper;
+import com.drivvy.model.Post;
 import com.drivvy.model.User;
 import com.drivvy.repository.UserRepository;
 import com.drivvy.service.api.UserService;
@@ -14,9 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -76,5 +77,6 @@ public class UserServiceImpl implements UserService {
 
         return saveUser(userDb);
     }
+
 
 }

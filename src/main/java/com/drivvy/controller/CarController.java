@@ -1,10 +1,15 @@
 package com.drivvy.controller;
 
+import com.drivvy.dto.common.ObjectType;
 import com.drivvy.dto.request.CarRequestDto;
+import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.session.UserDto;
 import com.drivvy.service.impl.CarServiceImpl;
+import com.drivvy.service.impl.PostServiceImpl;
 import com.drivvy.util.CarUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +23,7 @@ import java.util.List;
 public class CarController {
 
     private final CarServiceImpl carServiceImpl;
+    private final PostServiceImpl postService;
 
     @GetMapping("/")
     public String redirect() {
@@ -79,5 +85,15 @@ public class CarController {
     public String removeCar(@PathVariable Long carId) {
         carServiceImpl.removeCar(carId);
         return "redirect:/cars";
+    }
+
+    @PostMapping("/car/{id}/post/create")
+    public String createPost(
+            @PathVariable Long id,
+            PostRequestDto postRequestDto,
+            List<MultipartFile> filesImages
+    ) {
+        postService.create(postRequestDto, filesImages, ObjectType.CAR, id);
+        return "redirect:/profile/{id}";
     }
 }

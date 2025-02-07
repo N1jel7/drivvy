@@ -10,7 +10,6 @@ import com.drivvy.repository.CarRepository;
 import com.drivvy.service.api.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +28,7 @@ public class CarServiceImpl implements CarService {
 
     public void updateCarInfo(CarRequestDto carRequestDto, List<MultipartFile> files, Long carId) {
         log.info("Updating car(id={}) info", carId);
-        boolean valid = imageService.validateImages(files);
+        boolean valid = imageService.validateFilesOnUpdate(files);
 
         Car carFromDb = carUpdateProcess(getCarById(carId), carRequestDto, files, valid);
 
@@ -68,7 +67,7 @@ public class CarServiceImpl implements CarService {
 
     public void createCar(CarRequestDto carRequestDto, List<MultipartFile> files, Long userId) {
         log.info("Trying to create car");
-        boolean valid = imageService.validateImages(files);
+        boolean valid = imageService.validateFilesOnCreate(files);
 
         if(valid) {
 

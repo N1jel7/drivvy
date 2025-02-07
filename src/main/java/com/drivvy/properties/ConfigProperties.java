@@ -9,6 +9,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "default")
 public class ConfigProperties {
     private String userImagePath;
-    private String carImagePath;
     private String communityImagePath;
 }

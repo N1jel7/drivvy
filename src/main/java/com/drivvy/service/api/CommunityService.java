@@ -10,7 +10,7 @@ public interface CommunityService {
 
     List<CommunityResponseDto> getAllGroups();
 
-    CommunityResponseDto getCommunityById(Long id);
+    CommunityResponseDto getCommunityDtoById(Long id);
 
     CommunityResponseDto create(CommunityRequestDto communityRequestDto, MultipartFile avatarFile, Long creatorId);
 

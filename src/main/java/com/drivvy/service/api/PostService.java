@@ -1,17 +1,18 @@
 package com.drivvy.service.api;
 
+import com.drivvy.dto.common.ObjectType;
 import com.drivvy.dto.request.PostRequestDto;
-import com.drivvy.model.Car;
-import com.drivvy.model.Community;
-import com.drivvy.model.User;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface PostService {
 
-    Community addPostToCommunity(Community community, PostRequestDto postRequestDto);
-
-    User addPostToUser(User user, PostRequestDto postRequestDto);
-
-    Car addPostToCar(Car car, PostRequestDto postRequestDto);
+    void create(
+            PostRequestDto postRequestDto,
+            List<MultipartFile> filesImages,
+            ObjectType type,
+            Long ownerId);
 
     Long countPostsByCommunityId(Long communityId);
 }
