@@ -24,7 +24,7 @@ public class CommunityController {
 
     @GetMapping("/communities")
     public String viewAllCommunities(Model model) {
-        model.addAttribute("communities", communityService.getAllGroups());
+        model.addAttribute("communities", communityService.getAllCommunities());
         return "community/communities";
     }
 
@@ -51,10 +51,16 @@ public class CommunityController {
         return "redirect:/community/" + createdCommunity.id();
     }
 
+    @GetMapping("community/{communityId}/leave")
+    public String leaveCommunity(@PathVariable Long communityId, @SessionAttribute UserDto userDto) {
+        communityService.removeUserFromCommunity(communityId, userDto.getId());
+        return "redirect:communities/" + userDto.getId();
+    }
+
     @GetMapping("communities/{userId}")
     public String viewUserCommunities(@PathVariable Long userId, Model model) {
-
-        return "";
+        model.addAttribute("communities", communityService.getUserCommunities(userId));
+    return "community/user-communities";
     }
 
     @GetMapping("community/join/{id}")

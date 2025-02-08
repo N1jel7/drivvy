@@ -33,18 +33,10 @@ public class CommunityServiceImpl implements CommunityService {
 
 
     public CommunityResponseDto mapToResponse(Community community) {
-        CommunityResponseDto communityResponseDto = communityMapper.mapToResponse(community);
-        return new CommunityResponseDto(
-                communityResponseDto.id(),
-                communityResponseDto.name(),
-                communityResponseDto.description(),
-                communityResponseDto.avatar(),
-                communityResponseDto.country(),
-                communityResponseDto.accessModifier(),
-                communityResponseDto.overviewMembers(),
-                communityRepository.countMembersByCommunityId(communityResponseDto.id()),
-                postRepository.countPostsByCommunityId(communityResponseDto.id())
-        );
+        Long membersCount = communityRepository.countMembersByCommunityId(community.getId());
+        Long communityCount = postRepository.countPostsByCommunityId(community.getId());
+        return communityMapper.mapToResponse(community, membersCount, communityCount);
+
     }
 
     public List<CommunityResponseDto> mapToResponse(List<Community> communities) {
@@ -57,9 +49,13 @@ public class CommunityServiceImpl implements CommunityService {
         return communityRepository.isItMember(communityId, userId);
     }
 
+    public List<CommunityResponseDto> getUserCommunities(Long userId) {
+        return mapToResponse(communityRepository.findCommunitiesByMembers_Id(userId));
+    }
+
     //TODO PAGINATION
     @Override
-    public List<CommunityResponseDto> getAllGroups() {
+    public List<CommunityResponseDto> getAllCommunities() {
         return mapToResponse((communityRepository.findAll()));
     }
 

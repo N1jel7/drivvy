@@ -3,8 +3,10 @@ package com.drivvy.controller;
 import com.drivvy.dto.common.ObjectType;
 import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.request.UpdateUserInfoRequestDto;
+import com.drivvy.dto.response.CarResponseDto;
 import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.dto.session.UserDto;
+import com.drivvy.service.impl.CarServiceImpl;
 import com.drivvy.service.impl.PostServiceImpl;
 import com.drivvy.service.impl.UserServiceImpl;
 import com.drivvy.util.CountryUtils;
@@ -23,6 +25,7 @@ public class ProfileController {
 
     private final UserServiceImpl userService;
     private final PostServiceImpl postService;
+    private final CarServiceImpl carService;
 
 
     @PostMapping("/profile-edit/update/personal-info")
@@ -39,13 +42,15 @@ public class ProfileController {
 
         model.addAttribute("userInfo", userResponseDto);
 
-        return "redirect:/profile-edit";
+        return "redirect:/profile/" + userDto.getId();
     }
 
     @GetMapping("/profile/{id}")
     public String viewProfile(@PathVariable Long id, Model model) {
         UserResponseDto profile = userService.getUserDtoById(id);
+        CarResponseDto car = carService.getUserLastCar(id);
         model.addAttribute("userInfo", profile);
+        model.addAttribute("car", car);
         return "user/profile";
     }
 

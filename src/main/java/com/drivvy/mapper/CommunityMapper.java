@@ -24,8 +24,8 @@ public abstract class CommunityMapper {
     @Autowired
     UserMapper userMapper;
 
-    @Mapping(target = "overviewMembers", source = "members", qualifiedByName = "getOverviewMembers")
-    public abstract CommunityResponseDto mapToResponse(Community community);
+    @Mapping(target = "overviewMembers", source = "community.members", qualifiedByName = "getOverviewMembers")
+    public abstract CommunityResponseDto mapToResponse(Community community, Long membersAmount, Long postsAmount);
 
     public abstract List<CommunityResponseDto> mapToResponse(List<Community> communities);
 

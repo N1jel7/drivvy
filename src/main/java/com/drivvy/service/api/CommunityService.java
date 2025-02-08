@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CommunityService {
 
-    List<CommunityResponseDto> getAllGroups();
+    List<CommunityResponseDto> getAllCommunities();
 
     CommunityResponseDto getCommunityDtoById(Long id);
 

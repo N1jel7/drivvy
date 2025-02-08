@@ -104,9 +104,15 @@ public class CarServiceImpl implements CarService {
         return carMapper.mapToResponse(carRepository.findAllByOwner_Id(userId));
     }
 
+    public CarResponseDto getUserLastCar(Long userId) {
+        return carMapper.mapToResponse(carRepository.findByOwner_id(userId));
+    }
+
     public Car getCarById(Long id) {
         return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException("Car with id " + id + " not found"));
     }
+
+
 
     public CarResponseDto getCarDtoById(Long id) {
         return carRepository.findById(id)
