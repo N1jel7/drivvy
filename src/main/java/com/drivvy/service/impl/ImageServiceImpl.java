@@ -30,8 +30,13 @@ public class ImageServiceImpl implements ImageService {
     private final ImageRepository imageRepository;
 
     public boolean validateFilesOnCreate(List<MultipartFile> files) {
-        if(files.size() > 10 || files.getFirst().getOriginalFilename().isEmpty()) {
-            throw new ImageValidationException("Incorrect numbers of images (>10 or null)");
+        if(files != null && files.size() > 10) {
+            throw new ImageValidationException("Incorrect numbers of images (>10)");
+        }
+
+        if(files == null) {
+            log.info("There are no images");
+            return false;
         }
 
         log.info("Files successfully passed validation");

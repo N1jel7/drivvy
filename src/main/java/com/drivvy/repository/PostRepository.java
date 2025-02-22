@@ -12,7 +12,13 @@ public interface PostRepository extends JpaRepository <Post, Long> {
 
     List<Post> findAllByOwner_Id(Long ownerId);
 
+    List<Post> findAllByCar_Id(Long carId);
+
     @Query(value = "SELECT count(1) from post WHERE community_id = :communityId",
             nativeQuery = true)
     Long countPostsByCommunityId(Long communityId);
+
+    @Query(value = "SELECT count(1) from post WHERE owner_id = :ownerId",
+            nativeQuery = true)
+    Long countPostsByUserId(Long ownerId);
 }

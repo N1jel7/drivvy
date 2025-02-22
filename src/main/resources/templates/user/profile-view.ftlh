@@ -323,13 +323,8 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="d-flex align-items-center">
-                                                            <div class="user-img">
-                                                                <img src="${springMacroRequestContext.contextPath}/assets/images/user/1.jpg"
-                                                                     alt="userimg"
-                                                                     class="avatar-60 rounded-circle img-fluid">
-                                                            </div>
-                                                            <form class="post-text ms-3 w-100" action="#">
-                                                                <input type="text" class="form-control rounded"
+                                                            <form id="post-form" class="post-text ms-3 w-100" method="post" action="/profile/${userInfo.id()}/post/create">
+                                                                <input type="text" name="description" class="form-control rounded"
                                                                        placeholder="Write something here..."
                                                                        style="border:none;">
                                                             </form>
@@ -346,118 +341,24 @@
                                                             <li class="col-md-6 mb-3">
                                                                 <div class="bg-soft-primary rounded p-2 pointer me-3"><a
                                                                             href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/08.png"
-                                                                            alt="icon" class="img-fluid"> Tag Friend
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/09.png"
-                                                                            alt="icon" class="img-fluid">
-                                                                    Feeling/Activity
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/10.png"
-                                                                            alt="icon" class="img-fluid"> Check in
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/11.png"
-                                                                            alt="icon" class="img-fluid"> Live Video
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
                                                                             src="${springMacroRequestContext.contextPath}/assets/images/small/12.png"
                                                                             alt="icon" class="img-fluid"> Gif
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/13.png"
-                                                                            alt="icon" class="img-fluid"> Watch Party
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/14.png"
-                                                                            alt="icon" class="img-fluid"> Play with
-                                                                    Friends
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                         <hr>
                                                         <div class="other-option">
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="user-img me-3">
-                                                                        <img src="${springMacroRequestContext.contextPath}/assets/images/user/1.jpg"
-                                                                             alt="userimg"
-                                                                             class="avatar-60 rounded-circle img-fluid">
-                                                                    </div>
-                                                                    <h6>Your Story</h6>
-                                                                </div>
                                                                 <div class="card-post-toolbar">
                                                                     <div class="dropdown">
                                                    <span class="dropdown-toggle" data-bs-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" role="button">
-                                                   <span class="btn btn-primary">Friend</span>
                                                    </span>
-                                                                        <div class="dropdown-menu m-0 p-0">
-                                                                            <a class="dropdown-item p-3" href="#">
-                                                                                <div class="d-flex align-items-top">
-                                                                                    <i class="ri-save-line h4"></i>
-                                                                                    <div class="data ms-2">
-                                                                                        <h6>Public</h6>
-                                                                                        <p class="mb-0">Anyone on or off
-                                                                                            Facebook</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                            <a class="dropdown-item p-3" href="#">
-                                                                                <div class="d-flex align-items-top">
-                                                                                    <i class="ri-close-circle-line h4"></i>
-                                                                                    <div class="data ms-2">
-                                                                                        <h6>Friends</h6>
-                                                                                        <p class="mb-0">Your Friend on
-                                                                                            facebook</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                            <a class="dropdown-item p-3" href="#">
-                                                                                <div class="d-flex align-items-top">
-                                                                                    <i class="ri-user-unfollow-line h4"></i>
-                                                                                    <div class="data ms-2">
-                                                                                        <h6>Friends except</h6>
-                                                                                        <p class="mb-0">Don't show to
-                                                                                            some friends</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                            <a class="dropdown-item p-3" href="#">
-                                                                                <div class="d-flex align-items-top">
-                                                                                    <i class="ri-notification-line h4"></i>
-                                                                                    <div class="data ms-2">
-                                                                                        <h6>Only Me</h6>
-                                                                                        <p class="mb-0">Only me</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit"
+                                                        <button type="submit" form="post-form"
                                                                 class="btn btn-primary d-block w-100 mt-3">Post
                                                         </button>
                                                     </div>
@@ -526,7 +427,7 @@
                                                                                     <i class="ri-delete-bin-7-line h4"></i>
                                                                                     <div class="data ms-2">
                                                                                         <h6>Delete</h6>
-                                                                                        <p class="mb-0">Remove thids
+                                                                                        <p class="mb-0">Remove this
                                                                                             Post on Timeline</p>
                                                                                     </div>
                                                                                 </div>

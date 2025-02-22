@@ -11,12 +11,14 @@ import com.drivvy.service.impl.PostServiceImpl;
 import com.drivvy.service.impl.UserServiceImpl;
 import com.drivvy.util.CountryUtils;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.control.MappingControl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Controller
@@ -46,12 +48,18 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/{id}")
-    public String viewProfile(@PathVariable Long id, Model model) {
+    public String viewProfile(@PathVariable Long id, Model model, @SessionAttribute UserDto userDto) {
         UserResponseDto profile = userService.getUserDtoById(id);
         CarResponseDto car = carService.getUserLastCar(id);
         model.addAttribute("userInfo", profile);
         model.addAttribute("car", car);
-        return "user/profile";
+        model.addAttribute("posts", postService.getPostByObjectId(id, ObjectType.USER));
+        if(Objects.equals(id, userDto.getId())) {
+            return "user/profile-own";
+        } else {
+            return "user/profile-view";
+        }
+
     }
 
     @GetMapping("/profile-edit")
