@@ -13,6 +13,7 @@ public record UserResponseDto(
         String lastname,
         String country,
         String city,
+        Integer postsAmount,
         Gender gender,
         LocalDate birthday
 ) {

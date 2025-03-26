@@ -34,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
             throw new ImageValidationException("Incorrect numbers of images (>10)");
         }
 
-        if(files == null) {
+        if(files == null || files.getFirst().getOriginalFilename() == "") {
             log.info("There are no images");
             return false;
         }

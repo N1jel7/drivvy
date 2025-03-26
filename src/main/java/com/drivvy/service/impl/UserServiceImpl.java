@@ -2,12 +2,16 @@ package com.drivvy.service.impl;
 
 import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.request.UpdateUserInfoRequestDto;
+import com.drivvy.dto.response.CommunityResponseDto;
+import com.drivvy.dto.response.ProfileInfoResponse;
 import com.drivvy.dto.response.UserResponseDto;
 import com.drivvy.dto.session.UserDto;
 import com.drivvy.exception.UserNotFoundException;
 import com.drivvy.mapper.UserMapper;
+import com.drivvy.model.Community;
 import com.drivvy.model.Post;
 import com.drivvy.model.User;
+import com.drivvy.repository.PostRepository;
 import com.drivvy.repository.UserRepository;
 import com.drivvy.service.api.UserService;
 import com.drivvy.util.ImageUtils;
@@ -25,7 +29,14 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
     private final UserMapper userMapper;
+
+
+    public ProfileInfoResponse getProfileInfo(Long userId) {
+        Integer posts = Math.toIntExact(postRepository.countPostsByUserId(userId));
+        return new ProfileInfoResponse(0, posts,0);
+    }
 
     public Long getUserId(String username) {
         Optional<Long> optionalId = Optional.ofNullable(userRepository.findByUsername(username).getId());

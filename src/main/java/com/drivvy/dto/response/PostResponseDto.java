@@ -4,6 +4,7 @@ import com.drivvy.model.Image;
 import com.drivvy.model.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record PostResponseDto(
@@ -11,7 +12,9 @@ public record PostResponseDto(
         String description,
         List<UserResponseDto> usersLiked,
         Integer likesAmount,
-        LocalDate createdAt,
-        List<ImageResponseDto> images
+        Integer commentsAmount,
+        LocalDateTime createdAt,
+        List<ImageResponseDto> images,
+        List<CommentResponseDto> comments
 ) {
 }

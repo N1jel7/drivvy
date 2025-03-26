@@ -1,6 +1,7 @@
 package com.drivvy.controller;
 
 import com.drivvy.dto.common.ObjectType;
+import com.drivvy.dto.request.CommentRequestDto;
 import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.request.UpdateUserInfoRequestDto;
 import com.drivvy.dto.response.CarResponseDto;
@@ -11,7 +12,6 @@ import com.drivvy.service.impl.PostServiceImpl;
 import com.drivvy.service.impl.UserServiceImpl;
 import com.drivvy.util.CountryUtils;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.control.MappingControl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,11 +49,13 @@ public class ProfileController {
 
     @GetMapping("/profile/{id}")
     public String viewProfile(@PathVariable Long id, Model model, @SessionAttribute UserDto userDto) {
-        UserResponseDto profile = userService.getUserDtoById(id);
+        UserResponseDto userInfo = userService.getUserDtoById(id);
         CarResponseDto car = carService.getUserLastCar(id);
-        model.addAttribute("userInfo", profile);
+        model.addAttribute("profileInfo", userService.getProfileInfo(id));
+        model.addAttribute("userInfo", userInfo);
         model.addAttribute("car", car);
         model.addAttribute("posts", postService.getPostByObjectId(id, ObjectType.USER));
+
         if(Objects.equals(id, userDto.getId())) {
             return "user/profile-own";
         } else {
@@ -80,6 +82,34 @@ public class ProfileController {
     public String privacyEdit() {
 
         return "user/privacy-edit";
+    }
+
+    @GetMapping("/like/{profileId}/{postId}")
+    public String likePost(@PathVariable Long postId, @PathVariable Long profileId, @SessionAttribute UserDto userDto) {
+        postService.likeOrDislikePost(userDto.getId(), postId);
+        return "redirect:/profile/" + profileId;
+    }
+
+    @PostMapping("/profile/{userId}/{postId}/comment")
+    public String leaveComment(
+            @PathVariable Long userId,
+            @PathVariable Long postId,
+            String content,
+            @SessionAttribute UserDto userDto) {
+        postService.addCommentToPost(new CommentRequestDto(userDto.getId(), postId, content));
+        return "redirect:/profile/" + userId;
+    }
+
+    @PostMapping("/profile/{userId}/post/{postId}/edit")
+    public String editPost(@PathVariable Long userId ,@PathVariable Long postId, PostRequestDto postRequestDto) {
+        postService.editPost(postRequestDto, postId);
+        return "redirect:/profile/" + userId;
+    }
+
+    @GetMapping("/profile/{userId}/post/{postId}/delete")
+    public String deletePost(@PathVariable Long userId ,@PathVariable Long postId) {
+        postService.deletePost(postId);
+        return "redirect:/profile/" + userId;
     }
 
     @PostMapping("/profile/{id}/post/create")

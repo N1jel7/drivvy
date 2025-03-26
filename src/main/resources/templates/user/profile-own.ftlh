@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Profile - ${userInfo.username()}</title>
+    <title>${userInfo.username()}</title>
 
     <link rel="shortcut icon" href="${springMacroRequestContext.contextPath}/assets/images/favicon.ico"/>
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/libs.min.css">
@@ -65,15 +65,15 @@
                                     <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
                                         <li class="text-center ps-3">
                                             <h6>Posts</h6>
-                                            <p class="mb-0">690</p>
+                                            <p class="mb-0">${profileInfo.posts()}</p>
                                         </li>
                                         <li class="text-center ps-3">
                                             <h6>Followers</h6>
-                                            <p class="mb-0">206</p>
+                                            <p class="mb-0">${profileInfo.followers()}</p>
                                         </li>
                                         <li class="text-center ps-3">
                                             <h6>Following</h6>
-                                            <p class="mb-0">100</p>
+                                            <p class="mb-0">${profileInfo.following()}</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -157,30 +157,6 @@
                                                 <li class=""><a href="#"><img
                                                                 src="${springMacroRequestContext.contextPath}/assets/images/page-img/g1.jpg"
                                                                 alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g2.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g3.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g4.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g5.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g6.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g7.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g8.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
-                                                <li class=""><a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/g9.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -200,54 +176,6 @@
                                                         <img src="${springMacroRequestContext.contextPath}/assets/images/user/05.jpg"
                                                              alt="gallary-image" class="img-fluid"/></a>
                                                     <h6 class="mt-2 text-center">Anna Rexia</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/06.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Tara Zona</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/07.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Polly Tech</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/08.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Bill Emia</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/09.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Moe Fugga</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/10.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Hal Appeno </h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/07.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Zack Lee</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/06.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Terry Aki</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/user/05.jpg"
-                                                                alt="gallary-image" class="img-fluid"/></a>
-                                                    <h6 class="mt-2 text-center">Greta Life</h6>
                                                 </li>
                                             </ul>
                                         </div>
@@ -278,39 +206,9 @@
                                                     <img src="${springMacroRequestContext.contextPath}/assets/images/small/07.png"
                                                          alt="icon" class="img-fluid me-2"> Photo/Video
                                                 </li>
-                                                <li class="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3 mb-md-0 mb-2">
-                                                    <img src="${springMacroRequestContext.contextPath}/assets/images/small/08.png"
-                                                         alt="icon" class="img-fluid me-2"> Tag Friend
-                                                </li>
-                                                <li class="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3">
-                                                    <img src="${springMacroRequestContext.contextPath}/assets/images/small/09.png"
-                                                         alt="icon" class="img-fluid me-2"> Feeling/Activity
-                                                </li>
-                                                <li class="bg-soft-primary rounded p-2 pointer text-center">
-                                                    <div class="card-header-toolbar d-flex align-items-center">
-                                                        <div class="dropdown">
-                                                            <div class="dropdown-toggle" id="post-option"
-                                                                 data-bs-toggle="dropdown">
-                                                                <i class="ri-more-fill h4"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-right"
-                                                                 aria-labelledby="post-option" style="">
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                   data-bs-target="#post-modal">Check in</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                   data-bs-target="#post-modal">Live Video</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                   data-bs-target="#post-modal">Gif</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                   data-bs-target="#post-modal">Watch Party</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                   data-bs-target="#post-modal">Play with Friend</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
                                             </ul>
                                         </div>
+
                                         <div class="modal fade" id="post-modal" tabindex="-1"
                                              aria-labelledby="post-modalLabel" aria-hidden="true">
                                             <div class="modal-dialog  modal-lg modal-fullscreen-sm-down">
@@ -322,30 +220,27 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="d-flex align-items-center">
-                                                            <form id="post-form" class="post-text ms-3 w-100" method="post" action="/profile/${userInfo.id()}/post/create">
+                                                        <form id="post-form" class="post-text ms-3 w-100" enctype="multipart/form-data" method="post" action="/profile/${userInfo.id()}/post/create">
+                                                            <div class="d-flex align-items-center">
                                                                 <input type="text" name="description" class="form-control rounded"
                                                                        placeholder="Write something here..."
                                                                        style="border:none;">
-                                                            </form>
-                                                        </div>
-                                                        <hr>
-                                                        <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/07.png"
-                                                                            alt="icon" class="img-fluid"> Photo/Video
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-md-6 mb-3">
-                                                                <div class="bg-soft-primary rounded p-2 pointer me-3"><a
-                                                                            href="#"></a><img
-                                                                            src="${springMacroRequestContext.contextPath}/assets/images/small/12.png"
-                                                                            alt="icon" class="img-fluid"> Gif
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                                            </div>
+                                                            <hr>
+                                                            <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">
+                                                                <li class="col-md-6 mb-3">
+                                                                    <div class="bg-soft-primary rounded p-2 pointer me-3">
+                                                                        <i class="upload-button">
+                                                                            <img
+                                                                                    src="${springMacroRequestContext.contextPath}/assets/images/small/07.png"
+                                                                                    alt="icon" class="img-fluid"> Photo/Video
+                                                                        </i>
+                                                                        <input class="file-upload" type="file" name="filesImages"
+                                                                               accept=/*"/>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </form>
                                                         <hr>
                                                         <div class="other-option">
                                                             <div class="d-flex align-items-center justify-content-between">
@@ -365,8 +260,62 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <#list posts as post>
+
+                                        <div class="modal fade" id="post-modal-edit" tabindex="-1"
+                                             aria-labelledby="post-modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog  modal-lg modal-fullscreen-sm-down">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="post-modalLabel">Edit Post</h5>
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal"><i class="ri-close-fill"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="post-form-edit" class="post-text ms-3 w-100" enctype="multipart/form-data" method="post" action="/profile/${userInfo.id()}/post/${post.id()}/edit">
+                                                            <div class="d-flex align-items-center">
+                                                                <input type="text" name="description" class="form-control rounded"
+                                                                       value="${post.description()}"
+                                                                       style="border:none;">
+                                                            </div>
+                                                            <hr>
+                                                            <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">
+                                                                <li class="col-md-6 mb-3">
+                                                                    <div class="bg-soft-primary rounded p-2 pointer me-3">
+                                                                        <i class="upload-button">
+                                                                            <img
+                                                                                    src="${springMacroRequestContext.contextPath}/assets/images/small/07.png"
+                                                                                    alt="icon" class="img-fluid"> Photo/Video
+                                                                        </i>
+                                                                        <input class="file-upload" type="file" name="filesImages"
+                                                                               accept=/*"/>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </form>
+                                                        <hr>
+                                                        <div class="other-option">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <div class="card-post-toolbar">
+                                                                    <div class="dropdown">
+                                                   <span class="dropdown-toggle" data-bs-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false" role="button">
+                                                   </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" form="post-form-edit"
+                                                                class="btn btn-primary d-block w-100 mt-3">Edit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="post-item">
@@ -393,17 +342,18 @@
                                                    <i class="ri-more-fill"></i>
                                                    </span>
                                                                         <div class="dropdown-menu m-0 p-0">
-                                                                            <a class="dropdown-item p-3" href="#">
+                                                                            <a class="dropdown-item p-3" href="" data-bs-toggle="modal"
+                                                                               data-bs-target="#post-modal-edit">
                                                                                 <div class="d-flex align-items-top">
                                                                                     <i class="ri-pencil-line h4"></i>
-                                                                                    <div class="data ms-2">
+                                                                                    <div class="data ms-2" >
                                                                                         <h6>Edit Post</h6>
                                                                                         <p class="mb-0">Update your post
                                                                                             and saved items</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </a>
-                                                                            <a class="dropdown-item p-3" href="#">
+                                                                            <a class="dropdown-item p-3" href="/profile/${userInfo.id()}/post/${post.id()}/delete">
                                                                                 <div class="d-flex align-items-top">
                                                                                     <i class="ri-delete-bin-7-line h4"></i>
                                                                                     <div class="data ms-2">
@@ -423,11 +373,15 @@
                                                 <div class="mt-3">
                                                     <p>${post.description()}</p>
                                                 </div>
-                                                <div class="user-post">
-                                                    <a href="#"><img
-                                                                src="${springMacroRequestContext.contextPath}/assets/images/page-img/p1.jpg"
-                                                                alt="post-image" class="img-fluid w-100"/></a>
-                                                </div>
+                                                <#if post.images()??>
+                                                        <div class="user-post">
+                                                    <#list post.images() as image>
+                                                            <a href="#"><img
+                                                                        src="data:image/png;base64,${image.image()}"
+                                                                        alt="post-image" class="img-fluid w-100"/></a>
+                                                    </#list>
+                                                        </div>
+                                                </#if>
                                                 <div class="comment-area mt-3">
                                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                                                         <div class="like-block position-relative d-flex align-items-center">
@@ -436,47 +390,13 @@
                                                                     <div class="dropdown">
                                                    <span class="dropdown-toggle" data-bs-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" role="button">
-                                                   <img src="${springMacroRequestContext.contextPath}/assets/images/icon/01.png"
-                                                        class="img-fluid" alt="">
+                                                   <button type="button" onclick="location.href='/like/${userInfo.id()}/${post.id()}';" class="btn btn-outline-link rounded-pill mb-1"><i class="ri-heart-line me-1"></i>Like</button>
                                                    </span>
                                                                         <div class="dropdown-menu py-2">
                                                                             <a class="ms-2 me-2" href="#"
                                                                                data-bs-toggle="tooltip"
                                                                                data-bs-placement="top" title="Like"><img
                                                                                         src="${springMacroRequestContext.contextPath}/assets/images/icon/01.png"
-                                                                                        class="img-fluid" alt=""></a>
-                                                                            <a class="me-2" href="#"
-                                                                               data-bs-toggle="tooltip"
-                                                                               data-bs-placement="top" title="Love"><img
-                                                                                        src="${springMacroRequestContext.contextPath}/assets/images/icon/02.png"
-                                                                                        class="img-fluid" alt=""></a>
-                                                                            <a class="me-2" href="#"
-                                                                               data-bs-toggle="tooltip"
-                                                                               data-bs-placement="top"
-                                                                               title="Happy"><img
-                                                                                        src="${springMacroRequestContext.contextPath}/assets/images/icon/03.png"
-                                                                                        class="img-fluid" alt=""></a>
-                                                                            <a class="me-2" href="#"
-                                                                               data-bs-toggle="tooltip"
-                                                                               data-bs-placement="top" title="HaHa"><img
-                                                                                        src="${springMacroRequestContext.contextPath}/assets/images/icon/04.png"
-                                                                                        class="img-fluid" alt=""></a>
-                                                                            <a class="me-2" href="#"
-                                                                               data-bs-toggle="tooltip"
-                                                                               data-bs-placement="top"
-                                                                               title="Think"><img
-                                                                                        src="${springMacroRequestContext.contextPath}/assets/images/icon/05.png"
-                                                                                        class="img-fluid" alt=""></a>
-                                                                            <a class="me-2" href="#"
-                                                                               data-bs-toggle="tooltip"
-                                                                               data-bs-placement="top" title="Sade"><img
-                                                                                        src="${springMacroRequestContext.contextPath}/assets/images/icon/06.png"
-                                                                                        class="img-fluid" alt=""></a>
-                                                                            <a class="me-2" href="#"
-                                                                               data-bs-toggle="tooltip"
-                                                                               data-bs-placement="top"
-                                                                               title="Lovely"><img
-                                                                                        src="${springMacroRequestContext.contextPath}/assets/images/icon/07.png"
                                                                                         class="img-fluid" alt=""></a>
                                                                         </div>
                                                                     </div>
@@ -488,10 +408,14 @@
                                                    ${post.likesAmount()} Likes
                                                    </span>
                                                                         <div class="dropdown-menu">
-                                                                            <#list post.usersLiked() as user>
-                                                                            <a class="dropdown-item" href="/profile/${user.id()}">${user.username()}</a>
-                                                                            </#list>
-                                                                            <a class="dropdown-item" href="#">Other</a>
+                                                                            <#if post.usersLiked()??>
+                                                                                <#list post.usersLiked() as user>
+                                                                                    <a class="dropdown-item" href="/profile/${user.id()}">${user.username()}</a>
+                                                                                </#list>
+                                                                                <a class="dropdown-item" href="#">See as list</a>
+                                                                                <#else>
+                                                                                <a class="dropdown-item" >No one liked this post</a>
+                                                                            </#if>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -500,18 +424,8 @@
                                                                 <div class="dropdown">
                                                 <span class="dropdown-toggle" data-bs-toggle="dropdown"
                                                       aria-haspopup="true" aria-expanded="false" role="button">
-                                                20 Comment
+                                                ${post.commentsAmount()} Comments
                                                 </span>
-                                                                    <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="#">Max Emum</a>
-                                                                        <a class="dropdown-item" href="#">Bill Yerds</a>
-                                                                        <a class="dropdown-item" href="#">Hap E.
-                                                                            Birthday</a>
-                                                                        <a class="dropdown-item" href="#">Tara Misu</a>
-                                                                        <a class="dropdown-item" href="#">Midge Itz</a>
-                                                                        <a class="dropdown-item" href="#">Sal Vidge</a>
-                                                                        <a class="dropdown-item" href="#">Other</a>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -524,60 +438,38 @@
                                                     </div>
                                                     <hr>
                                                     <ul class="post-comments p-0 m-0">
-                                                        <li class="mb-2">
-                                                            <div class="d-flex flex-wrap">
-                                                                <div class="user-img">
-                                                                    <img src="${springMacroRequestContext.contextPath}/assets/images/user/02.jpg"
-                                                                         alt="userimg"
-                                                                         class="avatar-35 rounded-circle img-fluid">
-                                                                </div>
-                                                                <div class="comment-data-block ms-3">
-                                                                    <h6>Monty Carlo</h6>
-                                                                    <p class="mb-0">Lorem ipsum dolor sit amet</p>
-                                                                    <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                        <a href="#">like</a>
-                                                                        <a href="#">reply</a>
-                                                                        <a href="#">translate</a>
-                                                                        <span> 5 min </span>
+                                                        <#if post.comments()??>
+                                                            <#list post.comments() as comment>
+                                                                <li class="mb-2">
+                                                                    <div class="d-flex flex-wrap">
+                                                                        <div class="user-img">
+                                                                            <img src="data:image/png;base64,${comment.author().avatar()}"
+                                                                                 alt="userimg"
+                                                                                 class="avatar-35 rounded-circle img-fluid">
+                                                                        </div>
+                                                                        <div class="comment-data-block ms-3">
+                                                                            <h6>${comment.author().username()}</h6>
+                                                                            <p class="mb-0">${comment.content()}</p>
+                                                                            <div class="d-flex flex-wrap align-items-center comment-activity">
+                                                                                <a href="#">like</a>
+                                                                                <a href="#">reply</a>
+                                                                                <span>${comment.createdAt()}</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex flex-wrap">
-                                                                <div class="user-img">
-                                                                    <img src="${springMacroRequestContext.contextPath}/assets/images/user/03.jpg"
-                                                                         alt="userimg"
-                                                                         class="avatar-35 rounded-circle img-fluid">
-                                                                </div>
-                                                                <div class="comment-data-block ms-3">
-                                                                    <h6>Paul Molive</h6>
-                                                                    <p class="mb-0">Lorem ipsum dolor sit amet</p>
-                                                                    <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                        <a href="#">like</a>
-                                                                        <a href="#">reply</a>
-                                                                        <a href="#">translate</a>
-                                                                        <span> 5 min </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                                </li>
+                                                            </#list>
+                                                        </#if>
                                                     </ul>
-                                                    <form class="comment-text d-flex align-items-center mt-3"
-                                                          action="javascript:void(0);">
-                                                        <input type="text" class="form-control rounded"
-                                                               placeholder="Enter Your Comment">
-                                                        <div class="comment-attagement d-flex">
-                                                            <a href="#"><i class="ri-link me-3"></i></a>
-                                                            <a href="#"><i class="ri-user-smile-line me-3"></i></a>
-                                                            <a href="#"><i class="ri-camera-line me-3"></i></a>
-                                                        </div>
+                                                    <form id="comment_form" method="post" action="/profile/${userInfo.id()}/${post.id()}/comment" class="comment-text d-flex align-items-center mt-3">
+                                                        <input type="text" name="content" class="form-control me-3" placeholder="Type your comment">
+                                                        <button type="submit" form="comment_form" class="btn btn-primary d-flex align-items-center p-2"><i class="far fa-paper-plane" aria-hidden="true"></i><span class="d-none d-lg-block ms-1">Send</span></button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </#list>
                                     </div>
+                                    </#list>
                                 </div>
                             </div>
                         </div>

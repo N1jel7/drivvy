@@ -11,7 +11,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Mapper(
         componentModel = "spring",
@@ -29,7 +31,10 @@ public abstract class ChatMapper {
 
     @Named("getLastMessage")
     public Message getLastMessage(List<Message> messages) {
-        return messages.getLast();
+        if(messages != null && !messages.isEmpty()) {
+            return messages.getLast();
+        }
+        return null;
     }
 
     @Named("getCompanion")
