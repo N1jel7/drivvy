@@ -2,6 +2,7 @@ package com.drivvy.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
@@ -22,9 +23,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+    @Column(length = 500)
     private String description;
+    @Column(length = 50)
+    private String title;
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Image> images = new ArrayList<>();
+
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private Image preview;
 
 
     @ManyToMany
@@ -45,6 +53,5 @@ public class Post {
 
     @ManyToOne
     private Car car;
-
 
 }

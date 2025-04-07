@@ -1,6 +1,8 @@
-<#include "../bar/left.ftlh">
-<#include "../bar/top.ftlh">
-<#include "../bar/bottom.ftlh">
+<#include "../freemarker-templates/bar/left.ftlh">
+<#include "../freemarker-templates/bar/top.ftlh">
+<#include "../freemarker-templates/bar/bottom.ftlh">
+<#include "../freemarker-templates/javascript/javascript.ftlh">
+<#include "../freemarker-templates/stylesheet/stylesheet.ftlh">
 
 <!doctype html>
 <html lang="en">
@@ -9,16 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Account Information</title>
 
-    <link rel="shortcut icon" href="${springMacroRequestContext.contextPath}/assets/images/favicon.ico"/>
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/libs.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/socialv.css?v=4.0.0">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/remixicon/fonts/remixicon.css">
-    <link rel="stylesheet"
-          href="${springMacroRequestContext.contextPath}/assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet"
-          href="${springMacroRequestContext.contextPath}/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <@stylesheet/>
 
 </head>
 <body class="  ">
@@ -254,20 +247,7 @@
 </div>
 <!-- Wrapper End-->
 <@bottomBar/>
-<!-- Backend Bundle JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/libs.min.js"></script>
-<!-- slider JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/slider.js"></script>
-<!-- masonry JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/masonry.pkgd.min.js"></script>
-<!-- SweetAlert JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/enchanter.js"></script>
-<!-- SweetAlert JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/sweetalert.js"></script>
-<!-- app JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/charts/weather-chart.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/js/app.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/js/lottie.js"></script>
+
+<@javascript/>
 </body>
 </html>

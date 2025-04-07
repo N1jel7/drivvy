@@ -10,7 +10,6 @@ public interface PostService {
 
     void create(
             PostRequestDto postRequestDto,
-            List<MultipartFile> filesImages,
             ObjectType type,
             Long ownerId);
 

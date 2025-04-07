@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface ImageService {
 
-    Image convertFileToImage(MultipartFile file) throws IOException;
+    Image convertMultipartFileToImage(MultipartFile file) throws IOException;
 
     Image convertArrayToImage(byte[] array);
 }

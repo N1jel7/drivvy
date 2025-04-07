@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -54,14 +53,12 @@ public class ProfileController {
         model.addAttribute("profileInfo", userService.getProfileInfo(id));
         model.addAttribute("userInfo", userInfo);
         model.addAttribute("car", car);
-        model.addAttribute("posts", postService.getPostByObjectId(id, ObjectType.USER));
+        model.addAttribute("posts", postService.getPostsByObjectId(id, ObjectType.USER));
 
-        if(Objects.equals(id, userDto.getId())) {
-            return "user/profile-own";
-        } else {
-            return "user/profile-view";
-        }
+        boolean isOwner = Objects.equals(id, userDto.getId());
 
+        model.addAttribute("isOwner", isOwner);
+        return "/user/profile-detail";
     }
 
     @GetMapping("/profile-edit")
@@ -74,23 +71,21 @@ public class ProfileController {
 
     @GetMapping("/account-edit")
     public String accountEdit() {
-
         return "user/account-edit";
     }
 
     @GetMapping("/privacy-edit")
     public String privacyEdit() {
-
         return "user/privacy-edit";
     }
 
-    @GetMapping("/like/{profileId}/{postId}")
+    @GetMapping("/profile/{profileId}/post/{postId}/like")
     public String likePost(@PathVariable Long postId, @PathVariable Long profileId, @SessionAttribute UserDto userDto) {
         postService.likeOrDislikePost(userDto.getId(), postId);
-        return "redirect:/profile/" + profileId;
+        return "redirect:/profile/{profileId}";
     }
 
-    @PostMapping("/profile/{userId}/{postId}/comment")
+    @PostMapping("/profile/{userId}/post/{postId}/comment")
     public String leaveComment(
             @PathVariable Long userId,
             @PathVariable Long postId,
@@ -103,7 +98,7 @@ public class ProfileController {
     @PostMapping("/profile/{userId}/post/{postId}/edit")
     public String editPost(@PathVariable Long userId ,@PathVariable Long postId, PostRequestDto postRequestDto) {
         postService.editPost(postRequestDto, postId);
-        return "redirect:/profile/" + userId;
+        return "redirect:/profile/{userId}";
     }
 
     @GetMapping("/profile/{userId}/post/{postId}/delete")
@@ -115,10 +110,9 @@ public class ProfileController {
     @PostMapping("/profile/{id}/post/create")
     public String createPost(
             @PathVariable Long id,
-            PostRequestDto postRequestDto,
-            List<MultipartFile> filesImages
+            PostRequestDto postRequestDto
     ) {
-        postService.create(postRequestDto, filesImages, ObjectType.USER, id);
+        postService.create(postRequestDto, ObjectType.USER, id);
         return "redirect:/profile/{id}";
     }
 

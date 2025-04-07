@@ -5,7 +5,7 @@
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
                     <li class="active">
-                        <a href="/" class=" ">
+                        <a href="/start" class=" ">
                             <i class="las la-newspaper"></i><span>Newsfeed</span>
                         </a>
                     </li>

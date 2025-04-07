@@ -1,6 +1,7 @@
 package com.drivvy.controller;
 
 import com.drivvy.dto.common.ObjectType;
+import com.drivvy.dto.request.CommentRequestDto;
 import com.drivvy.dto.request.CommunityRequestDto;
 import com.drivvy.dto.request.PostRequestDto;
 import com.drivvy.dto.response.CommunityResponseDto;
@@ -13,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Controller
 public class CommunityController {
@@ -25,13 +24,15 @@ public class CommunityController {
     @GetMapping("/communities")
     public String viewAllCommunities(Model model) {
         model.addAttribute("communities", communityService.getAllCommunities());
-        return "community/communities";
+        return "community/global-communities";
     }
 
     @GetMapping("/community/{id}")
     public String viewCommunity(@PathVariable Long id, Model model, @SessionAttribute UserDto userDto) {
+        model.addAttribute("isCreator", communityService.isCreator(id, userDto.getId()));
         model.addAttribute("isMember", communityService.isUserMember(id, userDto.getId()));
         model.addAttribute("community", communityService.getCommunityDtoById(id));
+        model.addAttribute("posts", postService.getPostsByObjectId(id, ObjectType.COMMUNITY));
         return "community/detail";
     }
 
@@ -69,13 +70,41 @@ public class CommunityController {
         return "redirect:/community/{id}";
     }
 
-    @PostMapping("/community/{id}/post/create")
-    public String createPost(
-            @PathVariable Long id,
-            PostRequestDto postRequestDto,
-            List<MultipartFile> filesImages
-    ) {
-        postService.create(postRequestDto, filesImages, ObjectType.COMMUNITY, id);
-        return "redirect:/profile/{id}";
+    @GetMapping("/community/{communityId}/post/{postId}/like")
+    public String likePost(@PathVariable Long postId, @PathVariable Long communityId, @SessionAttribute UserDto userDto) {
+        postService.likeOrDislikePost(userDto.getId(), postId);
+        return "redirect:/community/{communityId}";
     }
+
+    @PostMapping("/community/{communityId}/post/{postId}/comment")
+    public String leaveComment(
+            @PathVariable Long communityId,
+            @PathVariable Long postId,
+            String content,
+            @SessionAttribute UserDto userDto) {
+        postService.addCommentToPost(new CommentRequestDto(userDto.getId(), postId, content));
+        return "redirect:/community/{communityId}";
+    }
+
+    @PostMapping("/community/{communityId}/post/{postId}/edit")
+    public String editPost(@PathVariable Long communityId ,@PathVariable Long postId, PostRequestDto postRequestDto) {
+        postService.editPost(postRequestDto, postId);
+        return "redirect:/community/{communityId}";
+    }
+
+    @GetMapping("/community/{communityId}/post/{postId}/delete")
+    public String deletePost(@PathVariable Long communityId ,@PathVariable Long postId) {
+        postService.deletePost(postId);
+        return "redirect:/community/{communityId}";
+    }
+
+    @PostMapping("/community/{communityId}/post/create")
+    public String createPost(
+            @PathVariable Long communityId,
+            PostRequestDto postRequestDto
+    ) {
+        postService.create(postRequestDto, ObjectType.COMMUNITY, communityId);
+        return "redirect:/community/{communityId}";
+    }
+
 }

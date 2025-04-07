@@ -1,6 +1,8 @@
-<#include "../bar/left.ftlh">
-<#include "../bar/top.ftlh">
-<#include "../bar/bottom.ftlh">
+<#include "../freemarker-templates/bar/left.ftlh">
+<#include "../freemarker-templates/bar/top.ftlh">
+<#include "../freemarker-templates/bar/bottom.ftlh">
+<#include "../freemarker-templates/javascript/javascript.ftlh">
+<#include "../freemarker-templates/stylesheet/stylesheet.ftlh">
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,14 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Creation process</title>
 
-    <link rel="shortcut icon" href="${springMacroRequestContext.contextPath}/assets/images/favicon.ico"/>
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/libs.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/socialv.css?v=4.0.0">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/remixicon/fonts/remixicon.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <@stylesheet/>
 
 </head>
 <body class="  ">
@@ -105,7 +100,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Year produced</label>
-                                                <select class="form-select" name="year" required aria-label="Default select example 3">
+                                                <select class="form-select" name="year" required
+                                                        aria-label="Default select example 3">
                                                     <#list years as year>
                                                         <option value="#{year}">#{year}</option>
                                                     </#list>
@@ -222,7 +218,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" aria-required="true" class="btn btn-primary next action-button float-end" form="form-wizard1">
+                                <button type="submit" aria-required="true"
+                                        class="btn btn-primary next action-button float-end" form="form-wizard1">
                                     Create
                                 </button>
                                 <button type="button" name="previous"
@@ -239,30 +236,8 @@
 </div>
 <!-- Wrapper End-->
 <@bottomBar/>
-<!-- Backend Bundle JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/libs.min.js"></script>
-<!-- slider JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/slider.js"></script>
-<!-- masonry JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/masonry.pkgd.min.js"></script>
-<!-- SweetAlert JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/enchanter.js"></script>
-<!-- SweetAlert JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/sweetalert.js"></script>
-<!-- app JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/charts/weather-chart.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/js/app.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/js/lottie.js"></script>
 
+<@javascript/>
 
-<!-- offcanvas start -->
-
-<div class="offcanvas offcanvas-bottom share-offcanvas" tabindex="-1" id="share-btn" aria-labelledby="shareBottomLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="shareBottomLabel">Share</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-</div>
 </body>
 </html>

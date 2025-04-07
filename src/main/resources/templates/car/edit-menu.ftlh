@@ -1,6 +1,8 @@
-<#include "../bar/left.ftlh">
-<#include "../bar/top.ftlh">
-<#include "../bar/bottom.ftlh">
+<#include "../freemarker-templates/bar/left.ftlh">
+<#include "../freemarker-templates/bar/top.ftlh">
+<#include "../freemarker-templates/bar/bottom.ftlh">
+<#include "../freemarker-templates/javascript/javascript.ftlh">
+<#include "../freemarker-templates/stylesheet/stylesheet.ftlh">
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,16 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title> Edit menu </title>
 
-    <link rel="shortcut icon" href="${springMacroRequestContext.contextPath}/assets/images/favicon.ico"/>
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/libs.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/css/socialv.css?v=4.0.0">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/remixicon/fonts/remixicon.css">
-    <link rel="stylesheet"
-          href="${springMacroRequestContext.contextPath}/assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet"
-          href="${springMacroRequestContext.contextPath}/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <@stylesheet/>
 
 </head>
 <body class="  ">
@@ -72,11 +65,20 @@
                                         <label class="form-label">Engine type</label>
                                         <select class="form-select" name="engineType" required
                                                 aria-label="Default select example 3">
-                                            <option <#if car.engineType() == "Petrol">selected</#if> value="Petrol">Petrol</option>
-                                            <option <#if car.engineType() == "Diesel">selected</#if> value="Diesel">Diesel</option>
-                                            <option <#if car.engineType() == "Electric">selected</#if> value="Electric">Electric</option>
-                                            <option <#if car.engineType() == "Hybrid">selected</#if> value="Hybrid">Hybrid</option>
-                                            <option <#if car.engineType() == "Gas">selected</#if> value="Gas">Gas</option>
+                                            <option <#if car.engineType() == "Petrol">selected</#if> value="Petrol">
+                                                Petrol
+                                            </option>
+                                            <option <#if car.engineType() == "Diesel">selected</#if> value="Diesel">
+                                                Diesel
+                                            </option>
+                                            <option <#if car.engineType() == "Electric">selected</#if> value="Electric">
+                                                Electric
+                                            </option>
+                                            <option <#if car.engineType() == "Hybrid">selected</#if> value="Hybrid">
+                                                Hybrid
+                                            </option>
+                                            <option <#if car.engineType() == "Gas">selected</#if> value="Gas">Gas
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,7 +88,8 @@
                                         <select class="form-select" name="engineVolume"
                                                 aria-label="Default select example 3">
                                             <#list volumes as volume>
-                                                <option value="${volume}" <#if volume == car.engineVolume() >selected</#if>>${volume}</option>
+                                                <option value="${volume}"
+                                                        <#if volume == car.engineVolume() >selected</#if>>${volume}</option>
                                             </#list>
                                         </select>
                                     </div>
@@ -102,7 +105,8 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationDefault05">Mileage</label>
-                                    <input type="text" class="form-control" name="mileage" placeholder="${car.mileage()}"
+                                    <input type="text" class="form-control" name="mileage"
+                                           placeholder="${car.mileage()}"
                                            id="validationDefault05">
                                 </div>
                                 <div class="col-md-6">
@@ -110,7 +114,7 @@
                                         <label for="validationTextarea" class="form-label">Description</label>
                                         <textarea class="form-control" name="description"
                                                   id="validationTextarea" placeholder="${car.description()}"
-                                                  ></textarea>
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +220,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header-title align-content-center">
-                                    <button type="submit" form="car-edit" class="btn btn-primary">Save all changes</button>
+                                    <button type="submit" form="car-edit" class="btn btn-primary">Save all changes
+                                    </button>
                                     <button type="reset" form="car-edit" class="btn btn-primary">Reset</button>
                                 </div>
                             </div>
@@ -225,35 +230,11 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 <!-- Wrapper End-->
 <@bottomBar/>
-<!-- Backend Bundle JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/libs.min.js"></script>
-<!-- slider JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/slider.js"></script>
-<!-- masonry JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/masonry.pkgd.min.js"></script>
-<!-- SweetAlert JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/enchanter.js"></script>
-<!-- SweetAlert JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/sweetalert.js"></script>
-<!-- app JavaScript -->
-<script src="${springMacroRequestContext.contextPath}/assets/js/charts/weather-chart.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/js/app.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
-<script src="${springMacroRequestContext.contextPath}/assets/js/lottie.js"></script>
 
-
-<!-- offcanvas start -->
-
-<div class="offcanvas offcanvas-bottom share-offcanvas" tabindex="-1" id="share-btn" aria-labelledby="shareBottomLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="shareBottomLabel">Share</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-</div>
+<@javascript/>
 </body>
 </html>

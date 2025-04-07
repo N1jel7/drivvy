@@ -17,6 +17,10 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
             nativeQuery = true)
     boolean isItMember(Long communityId, Long userId);
 
+    @Query(value = "SELECT if(count(*)>0,'true','false') from communities WHERE id = :communityId AND creator_id = :userId",
+            nativeQuery = true)
+    boolean isItCreator(Long communityId, Long userId);
+
     @Query(value = "SELECT * from community WHERE users = :communityId AND member_id = :userId",
             nativeQuery = true)
     boolean getUserCommunities(Long userId);

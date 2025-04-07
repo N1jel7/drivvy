@@ -15,7 +15,6 @@ import com.drivvy.service.api.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +34,19 @@ public class PostServiceImpl implements PostService {
     private final CommunityServiceImpl communityService;
 
     @Override
-    public void create(PostRequestDto postRequestDto, List<MultipartFile> filesImages, ObjectType type, Long ownerId) {
+    public void create(PostRequestDto postRequestDto, ObjectType type, Long ownerId) {
         log.info("Trying to create post");
         Post post = postMapper.mapRequestToEntity(postRequestDto);
-        boolean valid = imageService.validateFilesOnCreate(filesImages);
+        boolean valid = imageService.validateFilesOnCreate(postRequestDto.filesImages());
+
         if (valid) {
-            post.setImages(imageService.filesToImages(filesImages));
+            post.setImages(imageService.convertMultipartFilesToImages(postRequestDto.filesImages()));
+        }
+
+        if(postRequestDto.previewImage() != null) {
+            post.setPreview(imageService.convertMultipartFileToImage(postRequestDto.previewImage()));
+        } else {
+            post.setPreview(imageService.setDefaultPostImage());
         }
 
         switch (type) {
@@ -63,7 +69,7 @@ public class PostServiceImpl implements PostService {
         log.info("Post successfully created");
     }
 
-    public List<PostResponseDto> getPostByObjectId(Long objectId, ObjectType type) {
+    public List<PostResponseDto> getPostsByObjectId(Long objectId, ObjectType type) {
         List<Post> posts = new ArrayList<>();
         switch (type) {
             case USER:

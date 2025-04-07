@@ -29,6 +29,8 @@ public class Community {
             inverseJoinColumns = @JoinColumn(name = "community_id")
     )
     private List<User> members = new ArrayList<>();
+    @ManyToOne
+    private User creator;
     private String name;
     private String description;
     @OneToOne

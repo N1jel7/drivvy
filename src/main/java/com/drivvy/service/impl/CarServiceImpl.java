@@ -1,18 +1,24 @@
 package com.drivvy.service.impl;
 
+import com.drivvy.dto.common.ObjectType;
 import com.drivvy.dto.request.CarRequestDto;
 import com.drivvy.dto.response.CarResponseDto;
+import com.drivvy.dto.response.PostResponseDto;
 import com.drivvy.exception.CarNotFoundException;
 import com.drivvy.mapper.CarMapper;
 import com.drivvy.model.Car;
 import com.drivvy.model.Image;
+import com.drivvy.model.Post;
+import com.drivvy.model.User;
 import com.drivvy.repository.CarRepository;
+import com.drivvy.repository.PostRepository;
 import com.drivvy.service.api.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +31,21 @@ public class CarServiceImpl implements CarService {
     private final CarMapper carMapper;
     private final ImageServiceImpl imageService;
     private final UserServiceImpl userService;
+    private final PostRepository postRepository;
+
+    public CarResponseDto mapToResponse(Car car) {
+
+        List<Post> posts = postRepository.findAllByCar_Id(car.getId());
+
+        return carMapper.mapToResponse(car, posts);
+
+    }
+
+    public List<CarResponseDto> mapToResponse(List<Car> cars) {
+        return cars.stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
 
     public void updateCarInfo(CarRequestDto carRequestDto, List<MultipartFile> files, Long carId) {
         log.info("Updating car(id={}) info", carId);
@@ -44,7 +65,7 @@ public class CarServiceImpl implements CarService {
             int iterator = 0;
 
             while (images.size() <= 10 && !files.isEmpty()) {
-                images.add(imageService.convertFileToImage(files.get(iterator)));
+                images.add(imageService.convertMultipartFileToImage(files.get(iterator)));
 
                 files.removeFirst();
                 iterator++;
@@ -69,22 +90,22 @@ public class CarServiceImpl implements CarService {
         log.info("Trying to create car");
         boolean valid = imageService.validateFilesOnCreate(files);
 
-        if(valid) {
+        if (valid) {
 
-            List<Image> images = imageService.filesToImages(files);
+            List<Image> images = imageService.convertMultipartFilesToImages(files);
 
-            carRepository.save(new Car(
-                    null,
-                    carRequestDto.make(),
-                    carRequestDto.model(),
-                    carRequestDto.year(),
-                    carRequestDto.engineVolume(),
-                    carRequestDto.engineType(),
-                    carRequestDto.mileage(),
-                    carRequestDto.description(),
-                    userService.getUserById(userId),
-                    images
-            ));
+            carRepository.save(Car.builder()
+                    .make(carRequestDto.make())
+                    .model(carRequestDto.model())
+                    .year(carRequestDto.year())
+                    .engineVolume(carRequestDto.engineVolume())
+                    .engineType(carRequestDto.engineType())
+                    .mileage(carRequestDto.mileage())
+                    .description(carRequestDto.description())
+                    .owner(userService.getUserById(userId))
+                    .images(images)
+                    .createdAt(LocalDateTime.now())
+                    .build());
         }
 
         log.info("Car successfully created");
@@ -97,28 +118,41 @@ public class CarServiceImpl implements CarService {
 
     public List<CarResponseDto> getCars() {
         //TODO Пагинация (Pageable)
-        return carMapper.mapToResponse(carRepository.findAll());
+        return mapToResponse(carRepository.findAll());
     }
 
     public List<CarResponseDto> getUserCars(Long userId) {
-        return carMapper.mapToResponse(carRepository.findAllByOwner_Id(userId));
+        return mapToResponse(carRepository.findAllByOwner_Id(userId));
     }
 
     public CarResponseDto getUserLastCar(Long userId) {
-        return carMapper.mapToResponse(carRepository.findByOwner_id(userId));
+        return mapToResponse(carRepository.findByOwner_id(userId));
     }
 
     public Car getCarById(Long id) {
         return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException("Car with id " + id + " not found"));
     }
 
-
-
     public CarResponseDto getCarDtoById(Long id) {
         return carRepository.findById(id)
-                .map(carMapper::mapToResponse)
+                .map(this::mapToResponse)
                 .orElseThrow(() -> new CarNotFoundException("Car with id " + id + " not found"));
     }
 
+    public boolean likeOrDislikeCar(Long userId, Long carId) {
+        Car car = getCarById(carId);
+        User user = userService.getUserById(userId);
+
+        if (car.getUsersLikes().contains(user)) {
+            car.getUsersLikes().remove(user);
+            carRepository.save(car);
+            return false;
+        } else {
+            car.getUsersLikes().add(user);
+            carRepository.save(car);
+            return true;
+        }
+
+    }
 
 }

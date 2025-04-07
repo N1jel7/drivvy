@@ -50,7 +50,7 @@ public class ImageServiceImpl implements ImageService {
         return true;
     };
 
-    public Image convertFileToImage(MultipartFile file) {
+    public Image convertMultipartFileToImage(MultipartFile file) {
         log.info("Trying to convert file to image");
         Image image = new Image();
 
@@ -64,13 +64,13 @@ public class ImageServiceImpl implements ImageService {
         return image;
     }
 
-    public List<Image> filesToImages(List<MultipartFile> files) {
+    public List<Image> convertMultipartFilesToImages(List<MultipartFile> files) {
 
-        log.info("Trying to set images from uploaded files");
+        log.info("Trying to get images");
         List<Image> imagesFromFiles = new ArrayList<>();
 
         for (MultipartFile file : files) {
-            Image image = convertFileToImage(file);
+            Image image = convertMultipartFileToImage(file);
             if (files.getFirst().equals(file) && imagesFromFiles.isEmpty()) {
                 image.setPreview(true);
             }
@@ -99,6 +99,17 @@ public class ImageServiceImpl implements ImageService {
         try {
             Image image = new Image();
             image.setImage(Files.readAllBytes(new File(configProperties.getCommunityImagePath()).toPath()));
+            return image;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public Image setDefaultPostImage() {
+        try {
+            Image image = new Image();
+            image.setImage(Files.readAllBytes(new File(configProperties.getPostImagePath()).toPath()));
             return image;
         } catch (IOException e) {
             throw new RuntimeException(e);

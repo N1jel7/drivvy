@@ -45,6 +45,10 @@ public class CommunityServiceImpl implements CommunityService {
                 .toList();
     }
 
+    public boolean isCreator(Long communityId, Long userId) {
+        return communityRepository.isItCreator(communityId, userId);
+    }
+
     public boolean isUserMember(Long communityId, Long userId) {
         return communityRepository.isItMember(communityId, userId);
     }
@@ -81,9 +85,11 @@ public class CommunityServiceImpl implements CommunityService {
             image = imageService.setDefaultCommunityImage();
         }
 
+        User creator = userService.getUserById(creatorId);
         Community community = new Community(
                 null,
-                List.of(userService.getUserById(creatorId)),
+                List.of(creator),
+                creator,
                 communityRequestDto.name(),
                 communityRequestDto.description(),
                 image,

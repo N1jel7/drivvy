@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>${userDto.username} Communities</title>
+    <title>Global Communities</title>
 
     <@stylesheet/>
 
@@ -35,7 +35,7 @@
              class="img-fluid w-100" alt="header-bg">
         <div class="title-on-header">
             <div class="data-block">
-                <h2>Joined Communities</h2>
+                <h2>Communities</h2>
             </div>
         </div>
     </div>
@@ -91,14 +91,11 @@
                         <form method="get" href="/community/${com.id()}" action="community/${com.id()}">
                             <button type="submit" class="btn btn-primary d-block w-100">Visit</button>
                         </form>
-                        <form method="get" href="/community/${com.id()}/leave" action="community/${com.id()}/leave">
-                            <button type="submit" class="btn btn-primary d-block w-100">Leave</button>
-                        </form>
                     </div>
                 </div>
 
             <#else>
-                <h6>There are no joined communities yet.</h6>
+                <h6>There are no created communities yet.</h6>
 
             </#list>
 
